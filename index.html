@@ -1,0 +1,1266 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>玻璃計價方式｜集思室內設計（工班版）</title>
+<style>
+:root{--bg:#f4f2ec;--card:#ffffff;--ink:#1c1c1a;--sub:#55534d;--line:#d6d2c6;--accent:#1d5b86;--accent-soft:#e6f0f7;--warn:#8a4300;--warn-bg:#fff1dc;--bad:#b3141b;--bad-bg:#fde6e6;--ok:#17703a;--ok-bg:#e3f4e8;--todo:#fff3a0;--bar:#1f2a36}
+*{box-sizing:border-box}
+html{font-size:19px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Microsoft JhengHei","微軟正黑體","PingFang TC","Noto Sans TC",sans-serif;line-height:1.6;padding-bottom:120px}
+header{background:var(--bar);color:#fff;padding:14px 20px 0}
+header h1{margin:0 0 10px;font-size:1.45rem;letter-spacing:.05em}
+header h1 small{font-size:.8rem;font-weight:400;opacity:.8;margin-left:10px}
+.tabs{display:flex;flex-wrap:wrap;gap:6px}
+.tabs button{font:inherit;font-size:1.05rem;padding:10px 18px;border:0;border-radius:10px 10px 0 0;background:#3a4756;color:#e8edf2;cursor:pointer;min-height:48px}
+.tabs button.on{background:var(--bg);color:var(--ink);font-weight:700}
+main{max-width:1280px;margin:0 auto;padding:18px 16px}
+.tab{display:none}.tab.on{display:block}
+h2{font-size:1.3rem;margin:24px 0 10px;border-left:6px solid var(--accent);padding-left:10px}
+h3{font-size:1.1rem;margin:16px 0 8px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:12px 0}
+button{font:inherit;font-size:1rem;padding:9px 16px;min-height:46px;border-radius:9px;border:1px solid var(--accent);background:#fff;color:var(--accent);cursor:pointer}
+button.primary{background:var(--accent);color:#fff}
+button.danger{border-color:var(--bad);color:var(--bad)}
+button.small{min-height:40px;padding:5px 12px;font-size:.95rem}
+button:hover{filter:brightness(.94)}
+button:disabled{opacity:.35;cursor:default}
+input,select,textarea{font:inherit;font-size:1rem;padding:7px 10px;border:1px solid #b9b4a6;border-radius:8px;background:#fff;color:var(--ink);min-height:44px}
+textarea{width:100%;min-height:120px}
+input:focus,select:focus,textarea:focus{outline:3px solid #8cc0e6;border-color:var(--accent)}
+input[type=checkbox]{width:26px;height:26px;min-height:0;vertical-align:middle}
+.f{display:inline-flex;flex-direction:column;margin:0 14px 10px 0;vertical-align:top}
+.f>span{font-size:.85rem;color:var(--sub)}
+.w-xs{width:80px}.w-s{width:110px}.w-m{width:160px}.w-l{width:270px}.w-xl{width:380px}
+.row{display:flex;flex-wrap:wrap;align-items:flex-end}
+.gap{gap:10px}
+.piece{background:var(--card);border:1px solid var(--line);border-left:8px solid var(--accent);border-radius:12px;padding:12px 16px;margin:14px 0}
+.piece-head{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:8px}
+.piece-no{font-size:1.15rem;font-weight:700;color:var(--accent);min-width:74px}
+.piece-sum{margin-left:auto;font-size:1.25rem;font-weight:700}
+.res{background:var(--accent-soft);border-radius:9px;padding:10px 14px;margin-top:4px;font-size:.98rem}
+.res .tot{font-weight:700;font-size:1.08rem;margin-top:4px}
+.msg{border-radius:8px;padding:6px 12px;margin:6px 0;font-size:.97rem}
+.msg.bad{background:var(--bad-bg);color:var(--bad);font-weight:700}
+.msg.warn{background:var(--warn-bg);color:var(--warn)}
+.msg.info{background:#eef2f6;color:#34465a}
+.msg.ok{background:var(--ok-bg);color:var(--ok);font-weight:700}
+table{border-collapse:collapse;width:100%;background:#fff}
+th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:middle}
+th{background:#ece8dd;font-size:.92rem}
+td.num,th.num{text-align:right;white-space:nowrap}
+.tbl-wrap{overflow-x:auto}
+#typesTable td:first-child,#typesTable th:first-child{position:sticky;left:0;z-index:1;background:#fff;box-shadow:2px 0 3px rgba(0,0,0,.08)}
+#typesTable th:first-child{background:#ece8dd}
+.todo{background:var(--todo)!important}
+.sumgrid{display:grid;grid-template-columns:auto auto;gap:4px 28px;max-width:600px;font-size:1.05rem}
+.sumgrid .k{color:var(--sub)}.sumgrid .v{text-align:right;font-weight:700}
+.sumgrid .big{font-size:1.4rem;color:var(--accent)}
+.sumgrid .line{border-top:1px solid var(--line);padding-top:4px}
+.bar{position:fixed;left:0;right:0;bottom:0;background:var(--bar);color:#fff;padding:12px 20px;display:flex;flex-wrap:wrap;gap:6px 30px;font-size:1.12rem;z-index:20;box-shadow:0 -3px 10px rgba(0,0,0,.2)}
+.bar b{font-size:1.35rem;color:#ffe08a}
+.banner{border-radius:10px;padding:12px 16px;margin:10px 0;font-size:1rem}
+.banner.warn{background:var(--warn-bg);border:2px solid #f0b766;color:var(--warn)}
+.banner.bad{background:var(--bad-bg);border:2px solid #f19a9a;color:var(--bad)}
+.banner.ok{background:var(--ok-bg);border:2px solid #9fd3ae;color:var(--ok)}
+.toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#16324a;color:#fff;padding:12px 24px;border-radius:10px;font-size:1.08rem;z-index:60;display:none;max-width:90%}
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:center;justify-content:center;z-index:50}
+.modal{background:#fff;border-radius:14px;padding:20px 22px;max-width:760px;width:92%;max-height:88vh;overflow:auto}
+.help p,.help li{font-size:1rem}
+.help li{margin:5px 0}
+.help a{color:var(--accent)}
+.muted{color:var(--sub);font-size:.92rem}
+/* 業主報價單 */
+#sheet{background:#fff;color:#000;padding:28px 34px;border:1px solid var(--line);max-width:960px;margin:12px auto}
+#sheet h1{text-align:center;font-size:1.7rem;margin:0 0 4px;letter-spacing:.4em}
+#sheet .co{text-align:center;font-size:.95rem;margin-bottom:14px}
+#sheet .meta{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px 20px;margin:8px 0 10px;font-size:1rem}
+#sheet th{background:#eee}
+#sheet .total td{font-weight:700}
+#sheet .notes{white-space:pre-wrap;font-size:.92rem;margin-top:14px}
+#sheet .sign{display:flex;justify-content:space-between;margin-top:30px;font-size:1rem}
+@media print{
+ @page{size:A4;margin:12mm}
+ html{font-size:13px}
+ body{background:#fff;padding:0}
+ header,.bar,.no-print,.tab:not(#tab-client){display:none!important}
+ main{padding:0;max-width:none}
+ #tab-client{display:block!important}
+ #sheet{border:0;padding:0;max-width:none;margin:0}
+ body.vendor .tab.on:not(#tab-client){display:block!important}
+}
+@media (max-width:700px){
+ html{font-size:17px}
+ main{padding:12px 10px}
+ .w-l,.w-xl{width:calc(100vw - 64px)}
+ #typesTable .w-l{width:140px;font-size:.92rem;padding:6px}
+ #typesTable td,#typesTable th{padding:5px 6px}
+ .f{margin-right:10px}
+ .tabs button{padding:8px 12px;font-size:.98rem}
+ .bar{padding:8px 12px;gap:2px 16px;font-size:1rem}
+ .bar b{font-size:1.15rem}
+ .piece{padding:10px 12px}
+ #sheet{padding:16px 12px}
+}
+</style>
+</head>
+<body>
+<header>
+ <h1>玻璃報價計算器<small>集思室內設計・內部用・資料只存在這台電腦</small></h1>
+ <nav class="tabs" id="tabs">
+  <button data-tab="calc" class="on">① 報價計算</button>
+  <button data-tab="client">② 業主報價單</button>
+  <button data-tab="types">③ 玻璃單價表</button>
+  <button data-tab="procs">④ 加工與其他費用</button>
+  <button data-tab="rules">⑤ 計價規則與備份</button>
+  <button data-tab="help">⑥ 使用說明＋網路行情</button>
+ </nav>
+</header>
+<main>
+ <div id="storageWarn" class="no-print"></div>
+ <section class="tab on" id="tab-calc"></section>
+ <section class="tab" id="tab-client"></section>
+ <section class="tab" id="tab-types"></section>
+ <section class="tab" id="tab-procs"></section>
+ <section class="tab" id="tab-rules"></section>
+ <section class="tab help" id="tab-help">
+  <div id="helpVendor" style="display:none">
+  <h2>師傅您好：這個網頁怎麼用</h2>
+  <div class="card">
+  <ol>
+   <li>在「① 報價計算」輸入幾片您做過的尺寸（寬、高、片數、磨邊、開孔），看算出來的才數、光邊尺數、開孔費，跟您平常的算法一不一樣。</li>
+   <li>算法不一樣的話，到「⑤ 計價規則」調整：一尺用 30.3 還是 30 公分、每邊要不要先進位、才數怎麼進位、最低幾才。也可以用「規則對照器」：填您估價單上的尺寸和才數，程式會自動找出跟您一樣的算法。</li>
+   <li>到「③ 玻璃單價表」「④ 加工與其他費用」把價格改成您的價格（黃底的格子是還沒有價格的）。</li>
+   <li>改好後到「⑤ 計價規則」按「複製單價表」，到 LINE 跟我們的對話框長按「貼上」送出，就完成了。</li>
+  </ol>
+  <p class="muted">您填的資料只存在您自己的手機或電腦，不會上傳到任何地方。換手機或清除瀏覽器資料就會不見，所以改好記得傳給我們。</p>
+  </div>
+  </div>
+  <div id="helpSteps">
+  <h2>三步驟快速上手</h2>
+  <div class="card">
+  <ol>
+   <li><b>第一次用：</b>到「③ 玻璃單價表」把每才單價、光邊／斜邊每尺單價改成你配合玻璃行的價格，改好打勾。再到「⑤ 計價規則與備份」用「規則對照器」對一張玻璃行的估價單，讓才數算法跟玻璃行一模一樣。</li>
+   <li><b>每次報價：</b>在「① 報價計算」一項一項輸入：玻璃種類、寬、高、片數、磨邊、孔數。同尺寸的填片數就好；尺寸很多可以按「一次貼上多片尺寸」從 Excel 貼。運費、安裝、五金在下面「其他費用」加。</li>
+   <li><b>看「防爆掉檢查」：</b>紅色 ⛔ 一定要處理（代表有東西沒算到錢）。處理完到「② 業主報價單」列印、存 PDF，或複製貼到 Excel。</li>
+  </ol>
+  </div>
+  </div>
+
+  <h2>玻璃價錢是怎麼算出來的</h2>
+  <div class="card">
+  <p><b>一片玻璃的成本 ＝ 玻璃費（計價才數 × 每才單價）＋ 磨邊費（周長尺數 × 每尺單價）＋ 加工費（孔、R角、挖缺 × 每個單價）</b>，再乘片數。整案再加運費、搬運、吊車、安裝、五金。</p>
+  <ul>
+   <li><b>才：</b>1 才 ＝ 1 台尺 × 1 台尺 ＝ 30.3 × 30.3 公分 ＝ 918.09 平方公分。有些店用 30 × 30 ＝ 900 的快速算法（才數會多約 2%）。1 坪 ＝ 36 才；1 平方公尺 ≈ 10.9 才。</li>
+   <li><b>才數：</b>寬(公分) ÷ 30.3 × 高(公分) ÷ 30.3。例：90 × 180 公分 ＝ 2.97 尺 × 5.94 尺 ＝ 17.65 才 → 多數玻璃行無條件進位成 18 才。</li>
+   <li><b>一定要「每片各自」進位：</b>10 片 0.6 才的小玻璃，總面積只有 6 才，但每片要算最低 1 才，玻璃行會收 10 才的錢。只用總面積估，小片越多爆越多。</li>
+   <li><b>有的店「每邊先進位」：</b>水族館、二手轉包常把每邊先進位成整尺，32 × 30 公分就算 2 才、60 × 60 公分算 4 才。</li>
+   <li><b>光邊／斜邊：</b>量周長，四邊 ＝（寬＋高）× 2，換成尺 × 每尺單價。只有外露的邊要磨（裝在框裡的邊可以不磨），所以程式可以選磨哪幾邊。斜邊比光邊貴，斜邊越寬（3分、8分）越貴。強化前一定要磨邊，問清楚玻璃行的強化價有沒有含磨邊。</li>
+   <li><b>開孔／R角／挖缺：</b>以「個」計。大孔（把手、門夾、插座）比小孔貴；挖缺（門夾缺、鉸鍊缺、閃柱子）網路查不到公開價，請向玻璃行問。</li>
+   <li><b>強化玻璃：</b>開孔、挖缺、R角都要在強化「前」做好，進場後不能切、不能鑽。單片超過 25 才或厚度超過 12mm 算特殊規格，每才會變貴；單片強化最大約 300 × 800 公分（各廠不同）。強化製作約 3～7 個工作天。</li>
+   <li><b>重量：</b>玻璃每平方公尺每 1mm 厚約 2.5 公斤。10mm、90 × 200 公分一片約 45 公斤，要 2 人以上搬；超過 100 公斤要先看電梯、樓梯轉角，可能要吊車。</li>
+  </ul>
+  </div>
+
+  <div id="helpReasons">
+  <h2>報價會爆掉的 13 個原因（程式會幫你檢查）</h2>
+  <div class="card">
+  <ol>
+   <li>用「總面積」算才數，沒有每片各自進位。</li>
+   <li>小片沒算最低才數（未滿 1 才算 1 才；有的店強化 3 才起算）。</li>
+   <li>漏算光邊：層板、鏡子片數多時，光邊的錢很可觀。</li>
+   <li>漏算開孔、R角、挖缺（淋浴門的門夾孔、鉸鍊缺、把手孔）。</li>
+   <li>強化玻璃孔位沒先給，進場對不上要整片重做。</li>
+   <li>大片（超過 25 才）每才單價變貴，還照小片價估。</li>
+   <li>超過強化爐尺寸做不出來，要拆片或改膠合。</li>
+   <li>五金另計：門夾、鉸鍊、把手、軌道、吊輪、天地閂。</li>
+   <li>運費／出車費（一趟約 1,500～2,500）。</li>
+   <li>大片搬運：樓層搬運費、吊車（第一小時約 2,500～3,000）。</li>
+   <li>安裝工資、矽利康、拆舊清運。</li>
+   <li>破片、尺寸量錯要重做（用「預備金 %」預留）。</li>
+   <li>拿網路行情「低標」估價，實際叫貨是「高標」；玻璃行報未稅，你報業主忘了加稅。</li>
+  </ol>
+  </div>
+  </div>
+
+  <div id="helpMarket">
+  <h2>網路查到的行情（2026-11-06 查，僅供參考）</h2>
+  <div class="banner warn">網路上<b>沒有統一的進位方式與最低才數規定</b>，每家玻璃行都不一樣。下表是平台彙整或單一店家的價目，年份不一（有些是 2023～2024 年的資料）。正式報價一律以你配合的玻璃行為準。</div>
+  <div class="tbl-wrap"><table>
+   <thead><tr><th>項目</th><th>行情</th><th>出處</th></tr></thead>
+   <tbody>
+    <tr><td>清玻璃 3／5／8／10／12mm</td><td>45–70／70–100／100–160／160–180／180–250 元/才</td><td>PRO360</td></tr>
+    <tr><td>強化玻璃 5mm</td><td>100–150 元/才（某玻璃行實例 90）</td><td>PRO360、戊辰畫廊</td></tr>
+    <tr><td>強化玻璃 8mm</td><td>120–170 元/才（實例 136）</td><td>PRO360、戊辰畫廊</td></tr>
+    <tr><td>強化玻璃 10mm</td><td>180–260 元/才；單片超過 25 才 250–270（實例 184，25 才以上 245）</td><td>PRO360、戊辰畫廊</td></tr>
+    <tr><td>強化玻璃 12mm</td><td>260–300 元/才（實例 260）</td><td>PRO360、戊辰畫廊</td></tr>
+    <tr><td>膠合 5+5mm／強化膠合 5+5mm</td><td>250–350／500–600 元/才</td><td>PRO360</td></tr>
+    <tr><td>5mm 烤漆、噴砂、超白強化</td><td>240–400 元/才</td><td>PRO360</td></tr>
+    <tr><td>10mm 黑色烤漆強化</td><td>400–450 元/才</td><td>PRO360</td></tr>
+    <tr><td>壓花（長虹、格紋等，未強化）</td><td>250–350 元/才</td><td>PRO360</td></tr>
+    <tr><td>夾紗玻璃</td><td>300–600 元/才</td><td>PRO360</td></tr>
+    <tr><td>鏡子</td><td>3mm 明鏡 105、5mm 明鏡 115～130、灰鏡／茶鏡 140 元/才；行情 150–300</td><td>戊辰畫廊、PRO360</td></tr>
+    <tr><td>光邊（磨光邊）</td><td>5mm 20 元/尺、8mm 30 元/尺；以周長（長＋寬）× 2 計</td><td>戊辰畫廊</td></tr>
+    <tr><td>斜邊（磨斜邊）</td><td>5mm 25 元/尺、6–8mm 40 元/尺、鏡子 8分 30 元/尺</td><td>戊辰畫廊</td></tr>
+    <tr><td>異形光邊</td><td>5mm 70 元/才、8mm 100 元/才（30 才以下）</td><td>戊辰畫廊</td></tr>
+    <tr><td>打孔</td><td>120 元/孔；直徑 1cm 以上 300 元/孔；網路估 100–300</td><td>戊辰畫廊、比迪行銷</td></tr>
+    <tr><td>R角／圓角</td><td>120 元/個</td><td>戊辰畫廊</td></tr>
+    <tr><td>最低計價</td><td>不足 1 才以 1 才計；也有店家以 3 才起算</td><td>戊辰畫廊、比迪行銷</td></tr>
+    <tr><td>才數進位</td><td>多數店家每片無條件進位到整才；也有進位到 0.5 才或四捨五入</td><td>方印、小型裝修工作站</td></tr>
+    <tr><td>出車費（基本出工）</td><td>1,500–2,500 元/次</td><td>比迪行銷</td></tr>
+    <tr><td>吊車</td><td>第一小時 2,500–3,000，之後 1,000–1,500 元/小時</td><td>PRO360</td></tr>
+    <tr><td>玻璃門安裝工資</td><td>3,000–5,000 元/式</td><td>PRO360</td></tr>
+    <tr><td>五金</td><td>固定夾 200–500、門把 200–2,000、鉸鍊 200–800、暗鉸鍊 600–1,500 元/組；拉門軌道 250–400 元/公尺；吊輪 3,000–5,000、天地閂 500–700、擋門器 100–200、門鎖 200–500 元/組</td><td>PRO360（玻璃門）</td></tr>
+    <tr><td>整組行情對照</td><td>玻璃隔間（連工帶料）1,000–2,000 元/才；淋浴拉門 12,000–20,000 元/樘；浴室玻璃門 6,000–15,000 元/扇</td><td>PRO360</td></tr>
+   </tbody>
+  </table></div>
+  <h3>資料來源（點了會開新分頁）</h3>
+  <ul>
+   <li><a href="https://art-wuchen.com/index.php?route=product%2Fproduct&amp;product_id=8019" target="_blank" rel="noopener noreferrer">戊辰畫廊：玻璃、強化玻璃、明鏡計價方式（玻璃行實際價目表）</a></li>
+   <li><a href="https://www.pro360.com.tw/price/window_repair" target="_blank" rel="noopener noreferrer">PRO360：玻璃一才多少錢</a></li>
+   <li><a href="https://www.pro360.com.tw/price/tempered_glass" target="_blank" rel="noopener noreferrer">PRO360：強化玻璃價格</a></li>
+   <li><a href="https://www.pro360.com.tw/price/glass_cubicle" target="_blank" rel="noopener noreferrer">PRO360：玻璃隔間費用</a></li>
+   <li><a href="https://www.pro360.com.tw/price/glass_door" target="_blank" rel="noopener noreferrer">PRO360：玻璃門價格（含五金）</a></li>
+   <li><a href="https://www.pro360.com.tw/price/separate_bath" target="_blank" rel="noopener noreferrer">PRO360：乾濕分離費用</a></li>
+   <li><a href="https://www.945.com.tw/life/price?id=216" target="_blank" rel="noopener noreferrer">找師傅：2026 玻璃價格表</a></li>
+   <li><a href="https://www.whbydcc.com/%E4%B8%80%E7%89%87%E7%8E%BB%E7%92%83%E8%A6%81%E5%A4%9A%E5%B0%91%E9%8C%A2/" target="_blank" rel="noopener noreferrer">比迪行銷：一片玻璃要多少錢（出車費、吊車、孔位）</a></li>
+   <li><a href="https://fangbian.tw/cai-calculator/" target="_blank" rel="noopener noreferrer">方印：才數計算機（918.09、進位習慣）</a></li>
+   <li><a href="https://renokits.com/tools/glass-cai-calculator/" target="_blank" rel="noopener noreferrer">小型裝修工作站：玻璃才數計算器（逐片進位）</a></li>
+   <li><a href="https://www.ph84.idv.tw/forum/threads/191507/" target="_blank" rel="noopener noreferrer">水族論壇：玻璃才數價錢的計算（每邊進位整尺的實例）</a></li>
+   <li><a href="https://www.searchome.net/article.aspx?id=75105" target="_blank" rel="noopener noreferrer">設計家：玻璃種類與價格</a></li>
+   <li><a href="https://golden1932.pixnet.net/blog/posts/17269317288" target="_blank" rel="noopener noreferrer">門窗才數計算（1 才 = 918.09 平方公分）</a></li>
+  </ul>
+  </div>
+
+  <div id="helpData">
+  <h2>資料存在哪裡</h2>
+  <div class="card">
+   <p>所有資料（單價、案件）只存在這台電腦的瀏覽器裡，不上網、不傳到任何地方。換電腦、換瀏覽器或清除瀏覽器資料之前，請到「⑤ 計價規則與備份」按「匯出備份」，之後再用「匯入備份」還原。</p>
+   <p>同一個檔案用不同瀏覽器（Chrome 和 Edge）開，資料是分開的。</p>
+   <p>要請玻璃工班幫忙填單價：到「⑤ 計價規則與備份」的「單價表交換」，複製工班版網址傳給師傅。</p>
+  </div>
+  </div>
+ </section>
+</main>
+<div class="bar no-print" id="bar"></div>
+<div class="toast" id="toast"></div>
+<div class="modal-bg" id="modalBg"><div class="modal" id="modal"></div></div>
+
+<script>
+'use strict';
+(() => {
+const VENDOR = true; // 工班版開關：build_web.py 產生公開網頁時會改成 true（藏起報價倍率、毛利、業主報價單）
+const KEY = 'gisGlassQuote.v1';
+const $ = s => document.querySelector(s);
+
+/* ---------------- 儲存（localStorage，被擋時退回記憶體） ---------------- */
+let mem = {}, storageOK = true;
+try { localStorage.setItem('__gq', '1'); storageOK = localStorage.getItem('__gq') === '1'; localStorage.removeItem('__gq'); } catch (e) { storageOK = false; }
+function sget(k) { if (storageOK) { try { return localStorage.getItem(k); } catch (e) { storageOK = false; } } return Object.prototype.hasOwnProperty.call(mem, k) ? mem[k] : null; }
+function sset(k, v) { if (storageOK) { try { localStorage.setItem(k, v); return true; } catch (e) { storageOK = false; } } mem[k] = v; return false; }
+
+/* ---------------- 小工具 ---------------- */
+const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+function normIn(v) { return String(v == null ? '' : v).replace(/[０-９]/g, c => String.fromCharCode(c.charCodeAt(0) - 0xFEE0)).replace(/．/g, '.'); }
+function num(v) { if (typeof v === 'number') return isFinite(v) ? v : 0; if (v == null) return 0; const n = parseFloat(normIn(v).replace(/[,，\s]/g, '')); return isFinite(n) ? n : 0; }
+function r6(x) { return Math.round(x * 1e6) / 1e6; }
+function ceilStep(x, step) { if (!(step > 0)) return x; return r6(Math.ceil(r6(x / step) - 1e-9) * step); }
+function stepOf(v) { return (v === 'none' || v == null) ? 0 : (parseFloat(v) || 0); }
+function fmt(n, d) { d = d == null ? 2 : d; return Number(n || 0).toLocaleString('zh-TW', { maximumFractionDigits: d }); }
+function money(n) { return '$' + Math.round(n || 0).toLocaleString('zh-TW'); }
+function rnd(n, d) { const p = Math.pow(10, d); return Math.round((n || 0) * p) / p; }
+function clip(s, n) { return String(s == null ? '' : s).slice(0, n || 300); }
+function today() { const d = new Date(); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
+const icon = lv => lv === 'bad' ? '⛔ ' : lv === 'warn' ? '⚠️ ' : lv === 'ok' ? '✅ ' : 'ℹ️ ';
+
+function el(tag, props, ...kids) {
+  const e = document.createElement(tag); let val;
+  if (props) for (const k of Object.keys(props)) {
+    const v = props[k]; if (v == null || v === false) continue;
+    if (k === 'class') e.className = v;
+    else if (k === 'text') e.textContent = v;
+    else if (k === 'value') val = v;
+    else if (k.slice(0, 2) === 'on' && typeof v === 'function') e.addEventListener(k.slice(2), v);
+    else if (k === 'checked' || k === 'disabled') e[k] = !!v;
+    else e.setAttribute(k, v === true ? '' : v);
+  }
+  for (const kid of kids.flat(Infinity)) { if (kid == null || kid === false) continue; e.append(kid instanceof Node ? kid : document.createTextNode(String(kid))); }
+  if (val !== undefined) e.value = val;
+  return e;
+}
+function field(label, input) { return el('label', { class: 'f' }, el('span', { text: label }), input); }
+
+/* ---------------- 預設資料（網路行情，多取高標） ---------------- */
+const SIDES = {
+  '4': { w: 2, h: 2, t: '四邊' },
+  '2h': { w: 0, h: 2, t: '左右兩條直邊' },
+  '2w': { w: 2, h: 0, t: '上下兩條橫邊' },
+  '3h': { w: 1, h: 2, t: '三邊（左右＋一橫）' },
+  '3w': { w: 2, h: 1, t: '三邊（上下＋一直）' },
+  '1w1h': { w: 1, h: 1, t: '一橫一直' },
+  '1h': { w: 0, h: 1, t: '一條直邊' },
+  '1w': { w: 1, h: 0, t: '一條橫邊' }
+};
+const EDGES = { polish: '光邊', bevel: '斜邊', shape: '異形光邊（以才計）', none: '不磨邊' };
+const PROC_KEYS = ['holeS', 'holeL', 'corner', 'notch'];
+const PROC_SHORT = { holeS: '小孔', holeL: '大孔', corner: 'R角', notch: '挖缺' };
+const DEFAULT_NOTE = '1. 強化玻璃為訂製品，下單後無法退換，也無法現場切割或補鑽孔，尺寸以現場丈量為準。\n2. 本報價不含未列明之項目，如有追加另行報價。\n3. 報價有效期限 30 天。';
+
+const DEFAULT_TYPES = [
+  ['3mm 清玻璃', 3, 70, false, 20, 25, '網路行情 45–70/才'],
+  ['5mm 清玻璃', 5, 100, false, 20, 25, '網路行情 70–100/才'],
+  ['8mm 清玻璃', 8, 160, false, 30, 40, '網路行情 100–160/才'],
+  ['10mm 清玻璃', 10, 180, false, 35, 50, '網路行情 160–180/才；光邊、斜邊單價是推估'],
+  ['12mm 清玻璃', 12, 250, false, 40, 60, '網路行情 180–250/才；光邊、斜邊單價是推估'],
+  ['5mm 強化清玻', 5, 150, true, 20, 25, '網路行情 100–150/才（某玻璃行實例 90）'],
+  ['8mm 強化清玻', 8, 170, true, 30, 40, '網路行情 120–170/才（實例 136）'],
+  ['10mm 強化清玻', 10, 260, true, 35, 50, '網路行情 180–260/才；光邊、斜邊單價是推估'],
+  ['12mm 強化清玻', 12, 300, true, 40, 60, '網路行情 260–300/才；光邊、斜邊單價是推估'],
+  ['5mm 強化超白', 5, 400, true, 20, 25, '網路行情 240–400/才'],
+  ['5mm 強化烤漆', 5, 400, true, 20, 25, '網路行情 240–400/才（烤漆玻璃 200–500）'],
+  ['5mm 強化噴砂（霧面）', 5, 400, true, 20, 25, '網路行情 240–400/才'],
+  ['10mm 強化烤黑', 10, 450, true, 35, 50, '網路行情 400–450/才'],
+  ['5+5mm 膠合玻璃', 10, 350, false, 35, 50, '網路行情 250–350/才'],
+  ['5+5mm 強化膠合', 10, 600, true, 35, 50, '網路行情 500–600/才'],
+  ['5mm 長虹玻璃（壓花）', 5, 350, false, 20, 25, '網路行情 250–350/才；多數不能強化'],
+  ['5mm 夾紗玻璃', 5, 600, false, 20, 25, '網路行情 300–600/才'],
+  ['3mm 明鏡', 3, 105, false, 20, 25, '玻璃行實例 105/才'],
+  ['5mm 明鏡', 5, 150, false, 20, 30, '玻璃行實例 115–130/才；行情 150–300'],
+  ['5mm 灰鏡／茶鏡', 5, 200, false, 20, 30, '玻璃行實例 140/才；行情 150–300']
+];
+// 工班版：單價一律空白讓師傅自己填，不給網路行情當參考（避免師傅照高標報）
+function makeTypes() { return DEFAULT_TYPES.map((a, i) => ({ id: 'g' + String(i + 1).padStart(2, '0'), name: a[0], thick: a[1], price: VENDOR ? 0 : a[2], tempered: a[3], edge: VENDOR ? 0 : a[4], bevel: VENDOR ? 0 : a[5], minCai: '', note: VENDOR ? '' : a[6] })); }
+function makeProcs() {
+  return [
+    { key: 'holeS', name: '小孔（直徑 1cm 以下，螺絲孔）', unit: '孔', price: 120, note: '玻璃行實例 120/孔；網路行情 100–300' },
+    { key: 'holeL', name: '大孔（直徑 1cm 以上：把手、門夾、插座）', unit: '孔', price: 300, note: '玻璃行實例 300/孔' },
+    { key: 'corner', name: 'R角／圓角', unit: '個', price: 120, note: '玻璃行實例 120/個' },
+    { key: 'notch', name: '挖缺／挖角（門夾缺、鉸鍊缺、閃柱子）', unit: '個', price: 0, note: '網路查無公開行情，請向玻璃行問價後填入' },
+    { key: 'shape', name: '異形光邊（不規則形狀）', unit: '才', price: 100, note: '玻璃行實例 5mm 70/才、8mm 100/才（30 才以下）' }
+  ].map(p => VENDOR ? Object.assign(p, { price: 0, note: '' }) : p);
+}
+const DEFAULT_EXTRAS = [
+  ['出車費／基本運費', '趟', 2500, '網路行情 1,500–2,500（一次出車起步價）'],
+  ['樓層搬運費', '層', 0, '網路查無公開行情，請向玻璃行問價'],
+  ['吊車（第一小時）', '次', 3000, '網路行情 2,500–3,000'],
+  ['吊車（第二小時起）', '小時', 1500, '網路行情 1,000–1,500'],
+  ['玻璃安裝工資', '式', 5000, '網路行情 3,000–5,000/式'],
+  ['矽利康收邊', '式', 0, '網路查無公開行情'],
+  ['拆除舊玻璃＋清運', '式', 0, '網路查無公開行情'],
+  ['玻璃固定夾', '組', 500, '網路行情 200–500'],
+  ['玻璃門把手', '組', 2000, '網路行情 200–2,000'],
+  ['玻璃門鉸鍊', '組', 800, '網路行情 200–800'],
+  ['玻璃門暗鉸鍊／地鉸鍊', '組', 1500, '網路行情 600–1,500'],
+  ['玻璃拉門軌道', '公尺', 400, '網路行情 250–400'],
+  ['懸吊式拉門吊輪', '組', 5000, '網路行情 3,000–5,000'],
+  ['天地閂', '組', 700, '網路行情 500–700'],
+  ['擋門器', '組', 200, '網路行情 100–200'],
+  ['門鎖', '組', 500, '網路行情 200–500']
+];
+function makeExtras() { return DEFAULT_EXTRAS.map((a, i) => ({ id: 'x' + String(i + 1).padStart(2, '0'), name: a[0], unit: a[1], price: VENDOR ? 0 : a[2], note: VENDOR ? '' : a[3] })); }
+function defaultSettings() {
+  return { base: 30.3, sideRound: 'none', caiRound: '1', minCai: 1, bigCai: 25, bigPct: 30, edgeRound: '1', maxShort: 300, maxLong: 800, wWarn: 50, wHeavy: 100, pricesChecked: false,
+    company: { name: '集思室內設計', boss: '陳勝寶', addr: '台中市南區新華街30號', tel: '04-3505-2921' } };
+}
+
+/* ---------------- 狀態 ---------------- */
+let S = null;
+let pieceRefs = {}, extraRefs = {}, undo = null;
+const cur = () => S.cases[S.curId];
+
+function defaultTypeId() {
+  if (S.lastTypeId && S.glassTypes.some(t => t.id === S.lastTypeId)) return S.lastTypeId;
+  const t = S.glassTypes.find(x => x.tempered) || S.glassTypes[0];
+  return t ? t.id : '';
+}
+function newPiece(from) {
+  return { id: uid(), loc: '', typeId: from ? from.typeId : defaultTypeId(), w: '', h: '', qty: '1', edge: from ? from.edge : 'polish', sides: from ? from.sides : '4', holeS: '', holeL: '', corner: '', notch: '', note: '' };
+}
+function newCaseObj() {
+  return { id: uid(), name: '未命名案件', client: '', date: today(), updated: Date.now(), pieces: [newPiece()], extras: [],
+    quote: { mult: '1', reserve: '0', tax: false, lineRound: '1' },
+    clientOpt: { showSize: true, showUnit: false, mergeExtras: false, note: DEFAULT_NOTE } };
+}
+function ensureCase() {
+  if (S.curId && S.cases[S.curId]) return;
+  const ids = Object.keys(S.cases);
+  if (ids.length) { S.curId = ids.sort((a, b) => (S.cases[b].updated || 0) - (S.cases[a].updated || 0))[0]; return; }
+  const c = newCaseObj(); S.cases[c.id] = c; S.curId = c.id;
+}
+function sanCase(c) {
+  if (!c || typeof c !== 'object') return null;
+  const q = c.quote || {}, o = c.clientOpt || {};
+  return {
+    id: clip(c.id || uid(), 40), name: clip(c.name, 80) || '未命名案件', client: clip(c.client, 80), date: clip(c.date, 20), updated: num(c.updated),
+    pieces: Array.isArray(c.pieces) ? c.pieces.slice(0, 500).filter(p => p && typeof p === 'object').map(p => ({
+      id: clip(p.id || uid(), 40), loc: clip(p.loc, 60), typeId: clip(p.typeId, 40), w: clip(p.w, 12), h: clip(p.h, 12), qty: clip(p.qty == null ? '1' : p.qty, 8),
+      edge: EDGES[p.edge] ? p.edge : 'polish', sides: SIDES[p.sides] ? p.sides : '4',
+      holeS: clip(p.holeS, 6), holeL: clip(p.holeL, 6), corner: clip(p.corner, 6), notch: clip(p.notch, 6), note: clip(p.note, 120) })) : [],
+    extras: Array.isArray(c.extras) ? c.extras.slice(0, 300).filter(x => x && typeof x === 'object').map(x => ({
+      id: clip(x.id || uid(), 40), name: clip(x.name, 60), unit: clip(x.unit, 10), price: clip(x.price, 12), qty: clip(x.qty, 8), note: clip(x.note, 120) })) : [],
+    quote: { mult: q.mult != null ? clip(q.mult, 8) : '1', reserve: q.reserve != null ? clip(q.reserve, 8) : '0', tax: !!q.tax,
+      lineRound: ['1', '10', '100', '1000'].includes(String(q.lineRound)) ? String(q.lineRound) : '10' },
+    clientOpt: { showSize: o.showSize !== false, showUnit: !!o.showUnit, mergeExtras: !!o.mergeExtras, note: o.note != null ? clip(o.note, 2000) : DEFAULT_NOTE }
+  };
+}
+function sanitizeState(d) {
+  const st = { v: 1, settings: defaultSettings(), glassTypes: makeTypes(), procs: makeProcs(), extrasLib: makeExtras(), cases: {}, curId: null, lastTypeId: '' };
+  if (!d || typeof d !== 'object') return st;
+  if (d.settings && typeof d.settings === 'object') {
+    const s = st.settings;
+    for (const k of Object.keys(s)) {
+      if (k === 'company') {
+        if (d.settings.company && typeof d.settings.company === 'object') for (const ck of Object.keys(s.company)) if (d.settings.company[ck] != null) s.company[ck] = clip(d.settings.company[ck], 100);
+      } else if (d.settings[k] != null) {
+        s[k] = typeof s[k] === 'number' ? num(d.settings[k]) : typeof s[k] === 'boolean' ? !!d.settings[k] : clip(d.settings[k], 20);
+      }
+    }
+    if (!(s.base > 0)) s.base = 30.3;
+  }
+  if (Array.isArray(d.glassTypes)) st.glassTypes = d.glassTypes.slice(0, 300).filter(t => t && typeof t === 'object').map(t => ({
+    id: clip(t.id || uid(), 40), name: clip(t.name, 60), thick: num(t.thick), price: num(t.price), tempered: !!t.tempered, edge: num(t.edge), bevel: num(t.bevel),
+    minCai: (t.minCai === '' || t.minCai == null) ? '' : num(t.minCai), note: clip(t.note, 200) }));
+  if (Array.isArray(d.procs)) for (const p of st.procs) {
+    const f = d.procs.find(x => x && x.key === p.key);
+    if (f) { p.price = num(f.price); if (f.note != null) p.note = clip(f.note, 200); }
+  }
+  if (Array.isArray(d.extrasLib)) st.extrasLib = d.extrasLib.slice(0, 300).filter(x => x && typeof x === 'object').map(x => ({
+    id: clip(x.id || uid(), 40), name: clip(x.name, 60), unit: clip(x.unit, 10), price: num(x.price), note: clip(x.note, 200) }));
+  if (d.cases && typeof d.cases === 'object') for (const id of Object.keys(d.cases).slice(0, 500)) { const c = sanCase(d.cases[id]); if (c) st.cases[c.id] = c; }
+  st.curId = (d.curId && st.cases[d.curId]) ? d.curId : null;
+  st.lastTypeId = clip(d.lastTypeId, 40);
+  return st;
+}
+function load() { let d = null; try { const raw = sget(KEY); if (raw) d = JSON.parse(raw); } catch (e) { d = null; } S = sanitizeState(d); ensureCase(); }
+let saveTimer = null;
+function scheduleSave() { clearTimeout(saveTimer); saveTimer = setTimeout(saveNow, 300); refreshSummary(); }
+function saveNow() {
+  clearTimeout(saveTimer); saveTimer = null;
+  if (S.cases[S.curId]) S.cases[S.curId].updated = Date.now();
+  if (!sset(KEY, JSON.stringify(S))) showStorageWarn();
+}
+window.addEventListener('beforeunload', () => { if (saveTimer) saveNow(); });
+function showStorageWarn() {
+  const box = $('#storageWarn'); if (box.childNodes.length) return;
+  box.append(el('div', { class: 'banner bad', text: '⛔ 這個瀏覽器不讓網頁存資料，關掉視窗資料就會不見！請到「⑤ 計價規則與備份」按「匯出備份」存檔，或改用 Chrome／Edge 直接開這個檔案。' }));
+}
+
+/* ---------------- 計算核心 ---------------- */
+function procBy(key) { return S.procs.find(p => p.key === key) || { price: 0 }; }
+function caiOf(w, h, ru) {
+  const base = num(ru.base) || 30.3, ss = stepOf(ru.sideRound), cs = stepOf(ru.caiRound);
+  let wf = w / base, hf = h / base;
+  if (ss) { wf = ceilStep(wf, ss); hf = ceilStep(hf, ss); }
+  const c = wf * hf;
+  return cs ? ceilStep(c, cs) : Math.round(r6(c * 100)) / 100;
+}
+function calcPiece(p) {
+  const st = S.settings;
+  const R = { warns: [], procItems: [], total: 0, glassT: 0, edgeT: 0, procT: 0, raw: 0, bill: 0, qty: 0, weight: 0 };
+  const t = S.glassTypes.find(x => x.id === p.typeId); R.t = t;
+  const w = num(p.w), h = num(p.h); let q = num(p.qty); q = q > 0 ? Math.round(q) : 0;
+  R.qty = q; R.w = w; R.h = h;
+  if (!t) R.warns.push({ lv: 'bad', msg: '沒有選玻璃種類（或這個種類已經被刪除），請重新選擇' });
+  if (!(w > 0 && h > 0)) { R.empty = true; return R; }
+  if (q <= 0) R.warns.push({ lv: 'bad', msg: '片數是 0，這一項不會算錢' });
+  const base = num(st.base) || 30.3, ss = stepOf(st.sideRound);
+  R.wf = w / base; R.hf = h / base;
+  R.wr = ss ? ceilStep(R.wf, ss) : R.wf; R.hr = ss ? ceilStep(R.hf, ss) : R.hf;
+  R.raw = R.wf * R.hf;
+  R.cai = caiOf(w, h, st);
+  R.minC = (t && t.minCai !== '' && t.minCai != null) ? num(t.minCai) : num(st.minCai);
+  R.bill = Math.max(R.cai, R.minC || 0);
+  R.minApplied = R.bill > R.cai;
+  R.price = t ? num(t.price) : 0;
+  R.big = num(st.bigCai) > 0 && num(st.bigPct) > 0 && R.bill > num(st.bigCai);
+  R.unitEff = R.big ? R.price * (1 + num(st.bigPct) / 100) : R.price;
+  R.glass1 = R.bill * R.unitEff;
+  // 磨邊
+  const sd = SIDES[p.sides] || SIDES['4'];
+  R.edgeType = EDGES[p.edge] ? p.edge : 'polish';
+  R.edge1 = 0; R.edgeLen = 0; R.edgeLenR = 0; R.edgePrice = 0;
+  if (R.edgeType === 'polish' || R.edgeType === 'bevel') {
+    R.edgeLen = (sd.w * w + sd.h * h) / base;
+    const es = stepOf(st.edgeRound);
+    R.edgeLenR = es ? ceilStep(R.edgeLen, es) : Math.round(r6(R.edgeLen * 10)) / 10;
+    R.edgePrice = t ? num(R.edgeType === 'polish' ? t.edge : t.bevel) : 0;
+    R.edge1 = R.edgeLenR * R.edgePrice;
+    if (t && R.edgeLenR > 0 && R.edgePrice <= 0) R.warns.push({ lv: 'bad', msg: `${EDGES[R.edgeType]}單價是 0（在「③ 玻璃單價表」設定），這 ${fmt(R.edgeLenR, 1)} 尺沒算進去！` });
+  } else if (R.edgeType === 'shape') {
+    R.edgePrice = num(procBy('shape').price);
+    R.edge1 = R.bill * R.edgePrice;
+    if (R.edgePrice <= 0) R.warns.push({ lv: 'bad', msg: '異形光邊單價是 0（在「④ 加工與其他費用」設定），沒算進去！' });
+  }
+  // 孔、R角、挖缺
+  let holes = 0;
+  for (const k of PROC_KEYS) {
+    const cnt = Math.max(0, Math.round(num(p[k]))); if (!cnt) continue;
+    holes += cnt;
+    const unit = num(procBy(k).price);
+    R.procItems.push({ key: k, name: PROC_SHORT[k], cnt, price: unit, sub: cnt * unit });
+    if (unit <= 0) R.warns.push({ lv: 'bad', msg: `${PROC_SHORT[k]}單價是 0（在「④ 加工與其他費用」設定），這 ${cnt} 個沒算進去！請向玻璃行問價` });
+  }
+  R.proc1 = R.procItems.reduce((a, b) => a + b.sub, 0);
+  R.piece1 = R.glass1 + R.edge1 + R.proc1;
+  R.glassT = Math.round(R.glass1 * q); R.edgeT = Math.round(R.edge1 * q); R.procT = Math.round(R.proc1 * q);
+  R.total = R.glassT + R.edgeT + R.procT;
+  R.weight = (w / 100) * (h / 100) * (t ? num(t.thick) : 0) * 2.5;
+  // 防爆掉警示
+  if (t && R.price <= 0) R.warns.push({ lv: 'bad', msg: '這個玻璃種類的每才單價是 0，玻璃費沒算進去！' });
+  if (t && t.tempered) {
+    const lo = Math.max(w, h), sh = Math.min(w, h);
+    if (lo > num(st.maxLong) || sh > num(st.maxShort)) R.warns.push({ lv: 'bad', msg: `超過強化爐最大尺寸（設定 ${fmt(st.maxShort, 0)} × ${fmt(st.maxLong, 0)} 公分），可能做不出來：要拆片、改膠合，或先問玻璃行` });
+    if (holes > 0) R.warns.push({ lv: 'info', msg: '強化玻璃：孔、挖缺、R角都要在強化「前」做好。孔位圖要先給玻璃行，進場後不能補鑽，鑽錯整片報廢' });
+  }
+  if (R.minApplied) R.warns.push({ lv: 'info', msg: `小片：算出 ${fmt(R.cai)} 才，依最低計價以 ${fmt(R.bill)} 才計` });
+  if (R.big) R.warns.push({ lv: 'warn', msg: `單片超過 ${fmt(st.bigCai, 0)} 才（大片特殊規格），每才單價加 ${fmt(st.bigPct, 0)}%，變成 $${fmt(R.unitEff, 1)}/才` });
+  if (R.weight >= num(st.wHeavy) && num(st.wHeavy) > 0) R.warns.push({ lv: 'warn', msg: `單片約 ${fmt(R.weight, 0)} 公斤：先確認電梯、樓梯轉角上得去，可能要吊車，記得列吊車／搬運費` });
+  else if (R.weight >= num(st.wWarn) && num(st.wWarn) > 0) R.warns.push({ lv: 'warn', msg: `單片約 ${fmt(R.weight, 0)} 公斤：要 2 人以上搬運，記得列樓層搬運費` });
+  const safe = t && (t.tempered || /膠合|夾紗/.test(t.name));
+  if (t && !safe && !/鏡/.test(t.name) && /門|隔間|淋浴|浴|護欄|欄杆|扶手|地板|樓梯/.test(p.loc || '')) R.warns.push({ lv: 'warn', msg: '這個位置建議用強化或膠合玻璃（安全玻璃），一般玻璃破了會變成尖刀片' });
+  return R;
+}
+function ceilTo(x, step) { step = step > 0 ? step : 1; return Math.ceil(r6(x / step) - 1e-9) * step; }
+function calcAll() {
+  const c = cur(), st = S.settings;
+  const A = { pieces: [], glass: 0, edge: 0, proc: 0, pieceSum: 0, extras: 0, raw: 0, bill: 0, cnt: 0, warns: [], extraRows: [] };
+  c.pieces.forEach((p, i) => {
+    const r = calcPiece(p); A.pieces.push(r);
+    r.warns.forEach(w => A.warns.push({ lv: w.lv, msg: `第 ${i + 1} 項${p.loc ? '（' + p.loc + '）' : ''}：${w.msg}` }));
+    if (r.empty) return;
+    A.glass += r.glassT; A.edge += r.edgeT; A.proc += r.procT; A.pieceSum += r.total;
+    A.raw += r.raw * r.qty; A.bill += r.bill * r.qty; A.cnt += r.qty;
+  });
+  c.extras.forEach(x => {
+    const q = num(x.qty), pr = num(x.price), sub = Math.round(q * pr);
+    A.extraRows.push(sub); A.extras += sub;
+    if (q > 0 && pr <= 0) A.warns.push({ lv: 'bad', msg: `其他費用「${x.name || '未命名'}」單價是 0，沒算進去！` });
+  });
+  A.cost = A.pieceSum + A.extras;
+  const res = Math.max(0, num(c.quote.reserve)), mult = num(c.quote.mult) > 0 ? num(c.quote.mult) : 1;
+  A.resPct = res; A.mult = mult;
+  A.reserve = Math.round(A.cost * res / 100);
+  A.floor = A.cost + A.reserve;
+  const step = num(c.quote.lineRound) || 1, f = (1 + res / 100) * mult;
+  A.clientPieces = A.pieces.map(r => (r.empty || !r.total) ? 0 : ceilTo(r.total * f, step));
+  A.clientExtras = A.extraRows.map(s => s ? ceilTo(s * f, step) : 0);
+  A.quote = A.clientPieces.reduce((a, b) => a + b, 0) + A.clientExtras.reduce((a, b) => a + b, 0);
+  A.tax = c.quote.tax ? Math.round(A.quote * 0.05) : 0;
+  A.grand = A.quote + A.tax;
+  A.profit = A.quote - A.floor;
+  A.margin = A.quote ? A.profit / A.quote : 0;
+  A.perCai = A.bill ? A.quote / A.bill : 0;
+  // 整案檢查
+  const names = c.extras.filter(x => num(x.qty) > 0).map(x => x.name).join('|');
+  if (A.cnt > 0) {
+    if (!/運|出車|車資/.test(names)) A.warns.push({ lv: 'warn', msg: '整案沒有列「運費／出車費」，玻璃行通常會另外收' });
+    if (!/安裝|施工|工資/.test(names)) A.warns.push({ lv: 'info', msg: '整案沒有列「安裝工資」。如果要玻璃行來裝，記得加上' });
+    if (A.pieces.some(r => !r.empty && num(st.wWarn) > 0 && r.weight >= num(st.wWarn)) && !/搬運|樓層|吊車/.test(names)) A.warns.push({ lv: 'warn', msg: `有超過 ${fmt(st.wWarn, 0)} 公斤的大片，但沒有列「樓層搬運費」或「吊車」` });
+    if (!VENDOR && res <= 0) A.warns.push({ lv: 'info', msg: '預備金是 0%：破片重做、尺寸量錯會直接吃掉利潤' });
+    if (!VENDOR && mult < 1.1) A.warns.push({ lv: 'warn', msg: '報價倍率低於 1.1，扣掉預備金幾乎沒有利潤' });
+    if (!st.pricesChecked) A.warns.unshift({ lv: VENDOR ? 'warn' : 'bad', msg: VENDOR ? '請先到「③ 玻璃單價表」「④ 加工與其他費用」填上您的價格（黃底的格子），填好在單價表上方打勾' :'玻璃單價還是「網路行情參考值」，還沒改成你配合玻璃行的價格（到「③ 玻璃單價表」核對後打勾）' });
+  }
+  return A;
+}
+
+/* ---------------- 共用介面：提示、對話框、複製 ---------------- */
+let toastTimer = null;
+function toast(msg) { const t = $('#toast'); t.textContent = msg; t.style.display = 'block'; clearTimeout(toastTimer); toastTimer = setTimeout(() => { t.style.display = 'none'; }, 2600); }
+function showModal(node) { const m = $('#modal'); m.textContent = ''; m.append(node); $('#modalBg').style.display = 'flex'; }
+function closeModal() { $('#modalBg').style.display = 'none'; $('#modal').textContent = ''; }
+function askConfirm(msg, okText) {
+  return new Promise(resolve => {
+    showModal(el('div', {},
+      el('p', { style: 'font-size:1.12rem;white-space:pre-line', text: msg }),
+      el('div', { class: 'row gap' },
+        el('button', { class: 'danger', id: 'btnConfirmOk', onclick: () => { closeModal(); resolve(true); } }, okText || '確定'),
+        el('button', { class: 'primary', id: 'btnConfirmCancel', onclick: () => { closeModal(); resolve(false); } }, '取消'))));
+  });
+}
+async function copyText(text, label, hint) {
+  let ok = false;
+  try { if (navigator.clipboard && window.isSecureContext) { await navigator.clipboard.writeText(text); ok = true; } } catch (e) { ok = false; }
+  if (!ok) {
+    const ta = el('textarea', { style: 'position:fixed;left:-9999px;top:0' }); ta.value = text; document.body.append(ta); ta.select();
+    try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+    ta.remove();
+  }
+  if (ok) toast(`已複製${label}，` + (hint || '到 Excel 點一格按 Ctrl+V 貼上'));
+  else showModal(el('div', {},
+    el('h3', { text: '瀏覽器不讓程式自動複製，請手動複製' }),
+    el('p', { class: 'muted', text: '下面這格已經全選好了：電腦按 Ctrl+C；手機長按選「複製」。' }),
+    el('textarea', { id: 'manualCopy', readonly: true, value: text, style: 'min-height:160px', onfocus: e => e.target.select() }),
+    el('div', { class: 'row gap', style: 'margin-top:10px' }, el('button', { class: 'primary', onclick: closeModal }, '好了'))));
+  const mc = $('#manualCopy'); if (mc) { mc.focus(); mc.select(); }
+}
+const cellSafe = v => { const s = String(v == null ? '' : v).replace(/[\t\r\n]/g, ' '); return /^[=+@]/.test(s) ? ' ' + s : s; };
+const toTSV = rows => rows.map(r => r.map(cellSafe).join('\t')).join('\r\n');
+
+/* ---------------- ① 報價計算 ---------------- */
+function renderCalc() {
+  const root = $('#tab-calc'); root.textContent = '';
+  if (VENDOR) root.append(topBanner(), caseBar(), piecesSection(), extrasSection(), summarySection());
+  else root.append(caseBar(), topBanner(), piecesSection(), extrasSection(), quoteSection(), summarySection());
+  renderPieces(); renderExtras();
+}
+function topBanner() {
+  if (VENDOR) return el('div', { class: 'banner warn no-print', id: 'vendorIntro' },
+    el('div', { style: 'font-weight:700;font-size:1.08rem', text: '師傅您好，這是集思室內設計整理的玻璃計價方式，請幫我們看看：' }),
+    el('div', { text: '① 在下面輸入幾片尺寸，看算出來的才數、光邊尺數、開孔費，跟您平常的算法一不一樣。不一樣的地方可以到「⑤ 計價規則」調整。' }),
+    el('div', { text: '② 到「③ 玻璃單價表」「④ 加工與其他費用」把價格改成您的價格。' }),
+    el('div', { text: '③ 改好後到「⑤ 計價規則」按「複製單價表」，直接貼到 LINE 傳給我們就可以了。' }),
+    el('div', { class: 'muted', text: '您填的資料只存在您自己的手機或電腦，不會上傳到任何地方。' }));
+  if (S.settings.pricesChecked) return el('div');
+  return el('div', { class: 'banner bad no-print' }, '⛔ 目前的玻璃單價是「網路行情參考值」（多取高標），不是你玻璃行的價格。 ',
+    el('button', { class: 'small', id: 'btnGoTypes', onclick: () => showTab('types') }, '去改單價'));
+}
+function caseLabel(x) { return (x.id === S.curId ? '▶ ' : '') + x.name + (x.client ? '／' + x.client : '') + '（' + (x.date || '') + '）'; }
+function caseBar() {
+  const c = cur();
+  const list = Object.values(S.cases).sort((a, b) => (b.updated || 0) - (a.updated || 0));
+  const sel = el('select', { class: 'w-xl', id: 'caseSel', 'aria-label': '開啟其他案件', onchange: e => {
+      const id = e.target.value; if (!id || !S.cases[id]) return;
+      saveNow(); S.curId = id; undo = null; saveNow(); renderCalc(); refreshSummary(); toast('已開啟：' + cur().name); } },
+    el('option', { value: '', text: `— 開啟其他案件（共 ${list.length} 個）—` }),
+    list.map(x => el('option', { value: x.id, text: caseLabel(x) })));
+  sel.value = '';
+  const syncOpt = () => { const o = [...sel.options].find(op => op.value === c.id); if (o) o.textContent = caseLabel(c); };
+  return el('div', { class: 'card no-print' },
+    el('div', { class: 'row' },
+      field('案名', el('input', { class: 'w-l', id: 'caseName', value: c.name, oninput: e => { c.name = clip(e.target.value, 80); syncOpt(); scheduleSave(); } })),
+      VENDOR ? '' : field('業主', el('input', { class: 'w-m', id: 'caseClient', value: c.client, oninput: e => { c.client = clip(e.target.value, 80); syncOpt(); scheduleSave(); } })),
+      VENDOR ? '' : field('日期', el('input', { class: 'w-m', type: 'date', value: c.date, oninput: e => { c.date = clip(e.target.value, 20); syncOpt(); scheduleSave(); } }))),
+    el('div', { class: 'row gap' },
+      el('button', { class: 'primary', id: 'btnNewCase', onclick: () => {
+        saveNow(); const n = newCaseObj(); S.cases[n.id] = n; S.curId = n.id; undo = null; saveNow(); renderCalc(); refreshSummary(); toast('已開新案件'); const ci = $('#caseName'); ci.focus(); ci.select(); } }, '＋ 新案件'),
+      el('button', { id: 'btnDupCase', onclick: () => {
+        saveNow(); const n = JSON.parse(JSON.stringify(c)); n.id = uid(); n.name = clip(c.name + '（複製）', 80); n.updated = Date.now();
+        n.pieces.forEach(p => { p.id = uid(); }); n.extras.forEach(x => { x.id = uid(); });
+        S.cases[n.id] = n; S.curId = n.id; undo = null; saveNow(); renderCalc(); refreshSummary(); toast('已複製成新案件：' + n.name); } }, '複製這個案件'),
+      sel,
+      el('button', { class: 'danger', id: 'btnDelCase', onclick: () => askConfirm(`確定要刪除「${c.name}」？刪了就救不回來（除非有匯出備份）。`, '刪除').then(ok => {
+        if (!ok) return; delete S.cases[c.id]; S.curId = null; undo = null; ensureCase(); saveNow(); renderCalc(); refreshSummary(); toast('已刪除案件'); }) }, '刪除這個案件')));
+}
+function piecesSection() {
+  return el('div', {},
+    el('h2', { text: '玻璃明細（一項一項列，同尺寸的填片數）' }),
+    el('div', { id: 'pieces' }),
+    el('div', { class: 'row gap no-print' },
+      el('button', { class: 'primary', id: 'btnAddPiece', onclick: addPiece }, '＋ 新增一項（沿用上一項的玻璃與磨邊）'),
+      el('button', { id: 'btnPaste', onclick: openPaste }, '📋 一次貼上多片尺寸'),
+      el('span', { id: 'undoBox' })));
+}
+function addPiece() {
+  const c = cur(); const last = c.pieces[c.pieces.length - 1];
+  const p = newPiece(last); c.pieces.push(p); renderPieces(); scheduleSave();
+  const ref = pieceRefs[p.id]; if (ref) { ref.first.focus(); ref.card.scrollIntoView({ block: 'center' }); }
+}
+function renderPieces() {
+  const wrap = $('#pieces'); if (!wrap) return;
+  wrap.textContent = ''; pieceRefs = {};
+  const c = cur();
+  c.pieces.forEach((p, i) => wrap.append(pieceCard(p, i)));
+  const ub = $('#undoBox'); ub.textContent = '';
+  if (undo && undo.caseId === c.id) ub.append(el('button', { class: 'small', id: 'btnUndo', onclick: () => {
+    c.pieces.splice(Math.min(undo.index, c.pieces.length), 0, undo.piece); undo = null; renderPieces(); scheduleSave(); toast('已復原'); } },
+    `↶ 復原剛剛刪除的「${undo.piece.loc || '第 ' + (undo.index + 1) + ' 項'}」`));
+  c.pieces.forEach(p => refreshPiece(p));
+  refreshSummary();
+}
+function onPieceChange(p) { refreshPiece(p); refreshSummary(); scheduleSave(); }
+function pieceCard(p, i) {
+  const c = cur();
+  const on = (k, isNum) => e => { p[k] = isNum ? clip(normIn(e.target.value), 12) : clip(e.target.value, k === 'note' ? 120 : 60); onPieceChange(p); };
+  const typeSel = el('select', { class: 'w-xl', 'data-k': 'typeId', onchange: e => { p.typeId = e.target.value; S.lastTypeId = p.typeId; onPieceChange(p); } },
+    S.glassTypes.map(t => el('option', { value: t.id, text: `${t.name}　$${fmt(t.price, 1)}/才` })));
+  if (!S.glassTypes.some(t => t.id === p.typeId)) typeSel.prepend(el('option', { value: p.typeId || '', text: '（請選擇玻璃種類）' }));
+  typeSel.value = p.typeId || '';
+  const sidesSel = el('select', { class: 'w-l', 'data-k': 'sides', onchange: on('sides') }, Object.entries(SIDES).map(([k, v]) => el('option', { value: k, text: v.t })));
+  sidesSel.value = p.sides;
+  const edgeSel = el('select', { class: 'w-m', 'data-k': 'edge', onchange: e => { p.edge = e.target.value; sidesSel.disabled = !(p.edge === 'polish' || p.edge === 'bevel'); onPieceChange(p); } },
+    Object.entries(EDGES).map(([k, v]) => el('option', { value: k, text: v })));
+  edgeSel.value = p.edge;
+  sidesSel.disabled = !(p.edge === 'polish' || p.edge === 'bevel');
+  const numInput = (k, cls, ph) => el('input', { class: cls, 'data-k': k, inputmode: 'decimal', value: p[k] == null ? '' : p[k], placeholder: ph || '', oninput: on(k, true), onfocus: e => e.target.select() });
+  const wIn = numInput('w', 'w-s', '公分');
+  const res = el('div', { class: 'res' }), sum = el('div', { class: 'piece-sum' }), msgs = el('div');
+  const card = el('div', { class: 'piece', 'data-id': p.id },
+    el('div', { class: 'piece-head' },
+      el('span', { class: 'piece-no', text: `第 ${i + 1} 項` }),
+      el('input', { class: 'w-l', 'data-k': 'loc', placeholder: '位置（例：主浴淋浴門）', value: p.loc, oninput: on('loc'), 'aria-label': '位置' }),
+      sum,
+      el('button', { class: 'small no-print', 'data-act': 'dup', title: '複製一份放在下面', onclick: () => {
+        const cp = Object.assign({}, p, { id: uid() }); c.pieces.splice(c.pieces.indexOf(p) + 1, 0, cp); renderPieces(); scheduleSave(); toast(`已複製第 ${i + 1} 項`); } }, '複製'),
+      el('button', { class: 'small danger no-print', 'data-act': 'del', onclick: () => {
+        const idx = c.pieces.indexOf(p); if (idx < 0) return;
+        c.pieces.splice(idx, 1); undo = { caseId: c.id, piece: p, index: idx };
+        if (!c.pieces.length) c.pieces.push(newPiece(p));
+        renderPieces(); scheduleSave(); toast(`已刪除第 ${i + 1} 項（可以按「復原」）`); } }, '刪除')),
+    el('div', { class: 'row' },
+      field('玻璃種類', typeSel),
+      field('寬（橫向）公分', wIn),
+      field('高（直向）公分', numInput('h', 'w-s', '公分')),
+      field('片數', numInput('qty', 'w-xs'))),
+    el('div', { class: 'row' },
+      field('磨邊', edgeSel),
+      field('磨哪幾邊', sidesSel),
+      field('小孔', numInput('holeS', 'w-xs', '0')),
+      field('大孔', numInput('holeL', 'w-xs', '0')),
+      field('R角', numInput('corner', 'w-xs', '0')),
+      field('挖缺', numInput('notch', 'w-xs', '0')),
+      field('備註', el('input', { class: 'w-l', 'data-k': 'note', value: p.note, oninput: on('note') }))),
+    res, msgs);
+  pieceRefs[p.id] = { res, sum, msgs, first: wIn, card };
+  return card;
+}
+function refreshPiece(p) {
+  const ref = pieceRefs[p.id]; if (!ref) return;
+  const R = calcPiece(p), st = S.settings, ss = stepOf(st.sideRound);
+  ref.res.textContent = ''; ref.msgs.textContent = '';
+  if (R.empty) {
+    ref.res.append(el('div', { class: 'muted', text: '← 輸入寬、高（公分）就會自動算' })); ref.sum.textContent = '';
+  } else {
+    const side = (lab, cm, f, r) => `${lab} ${fmt(cm, 1)}公分＝${fmt(f, 2)}尺` + (ss && Math.abs(r - f) > 1e-9 ? `→${fmt(r, 2)}尺` : '');
+    let edgeLine;
+    if (R.edgeType === 'none') edgeLine = el('div', { class: 'muted', text: '磨邊：不磨' });
+    else if (R.edgeType === 'shape') edgeLine = el('div', { text: `異形光邊：${fmt(R.bill)} 才 × $${fmt(R.edgePrice, 1)} ＝ ${money(R.edge1)}` });
+    else edgeLine = el('div', { text: `${EDGES[R.edgeType]}：${(SIDES[p.sides] || SIDES['4']).t} ${fmt(R.edgeLen, 2)} 尺 → 計 ${fmt(R.edgeLenR, 2)} 尺 × $${fmt(R.edgePrice, 1)} ＝ ${money(R.edge1)}` });
+    ref.res.append(
+      el('div', {}, `才數：${side('寬', R.w, R.wf, R.wr)} × ${side('高', R.h, R.hf, R.hr)} ＝ ${fmt(R.wr * R.hr)} 才 → 計價 `, el('b', { text: `${fmt(R.bill)} 才/片` })),
+      el('div', { text: `玻璃：${fmt(R.bill)} 才 × $${fmt(R.unitEff, 1)} ＝ ${money(R.glass1)}` }),
+      edgeLine,
+      R.procItems.length ? el('div', { text: '加工：' + R.procItems.map(x => `${x.name} ${x.cnt} 個 × $${fmt(x.price, 0)}`).join('、') + ` ＝ ${money(R.proc1)}` }) : '',
+      el('div', { class: 'tot' }, `每片 ${money(R.piece1)} × ${R.qty} 片 ＝ ${money(R.total)}`,
+        el('span', { class: 'muted', style: 'font-weight:400;margin-left:16px', text: `單片約 ${fmt(R.weight, 1)} 公斤` })));
+    ref.sum.textContent = money(R.total);
+  }
+  R.warns.forEach(w => ref.msgs.append(el('div', { class: 'msg ' + w.lv, text: icon(w.lv) + w.msg })));
+}
+function openPaste() {
+  const ta = el('textarea', { id: 'pasteText', placeholder: '每行一項，例如：\n90 180 2 主浴淋浴門\n淋浴固定片 60x180\n45*120*4 浴櫃鏡' });
+  showModal(el('div', {},
+    el('h3', { text: '一次貼上多片尺寸' }),
+    el('p', { class: 'muted', text: '每行一項：寬、高、片數、位置（順序可以亂：第一個數字當寬、第二個當高、第三個當片數，文字當位置；「2片」也看得懂）。可以直接從 Excel 選好幾格複製貼上。玻璃種類與磨邊會沿用最後一項，貼完再個別改。' }),
+    ta,
+    el('div', { class: 'row gap', style: 'margin-top:10px' },
+      el('button', { class: 'primary', id: 'btnPasteOk', onclick: () => { const n = applyPaste(ta.value); closeModal(); toast(n ? `已加入 ${n} 項` : '沒有讀到尺寸，請確認每行至少有寬、高兩個數字'); } }, '加入'),
+      el('button', { onclick: closeModal }, '取消'))));
+  ta.focus();
+}
+function parsePasteLine(line) {
+  const s = normIn(line).replace(/[×xX*＊✕]/g, ' ').replace(/[,，、\t]/g, ' ').trim();
+  if (!s) return null;
+  const nums = [], words = []; let qty = null;
+  for (const tok of s.split(/\s+/)) {
+    const m = tok.match(/^(\d+(?:\.\d+)?)(cm|CM|公分|片)?$/);
+    if (m) { if (m[2] === '片') qty = m[1]; else nums.push(m[1]); }
+    else words.push(tok);
+  }
+  if (nums.length < 2) return null;
+  return { w: nums[0], h: nums[1], qty: qty || nums[2] || '1', loc: clip(words.join(' '), 60) };
+}
+function applyPaste(text) {
+  const c = cur(); let n = 0;
+  const lines = String(text || '').split(/\r?\n/).map(parsePasteLine).filter(Boolean);
+  if (!lines.length) return 0;
+  const tpl = c.pieces[c.pieces.length - 1];
+  if (c.pieces.length === 1 && !num(c.pieces[0].w) && !num(c.pieces[0].h) && !c.pieces[0].loc) c.pieces = [];
+  for (const L of lines.slice(0, 300)) { const p = newPiece(tpl); p.w = L.w; p.h = L.h; p.qty = L.qty; p.loc = L.loc; c.pieces.push(p); n++; }
+  renderPieces(); scheduleSave();
+  return n;
+}
+function extrasSection() {
+  const c = cur();
+  const libSel = el('select', { class: 'w-xl', id: 'libSel' }, el('option', { value: '', text: '— 從費用庫選一項 —' }),
+    S.extrasLib.map(x => el('option', { value: x.id, text: `${x.name}　$${fmt(x.price, 0)}/${x.unit}` })));
+  return el('div', {},
+    el('h2', { text: '其他費用（運費、安裝、五金、搬運、吊車…）' }),
+    el('div', { class: 'row gap no-print', style: 'margin-bottom:8px' }, libSel,
+      el('button', { class: 'primary', id: 'btnAddExtra', onclick: () => {
+        const x = S.extrasLib.find(v => v.id === libSel.value); if (!x) { toast('請先在左邊的選單選一項'); return; }
+        c.extras.push({ id: uid(), name: x.name, unit: x.unit, price: String(x.price), qty: '1', note: '' }); libSel.value = ''; renderExtras(); refreshSummary(); scheduleSave(); } }, '加入'),
+      el('button', { id: 'btnAddExtraFree', onclick: () => { c.extras.push({ id: uid(), name: '', unit: '式', price: '', qty: '1', note: '' }); renderExtras(); refreshSummary(); scheduleSave(); } }, '＋ 自己填一項')),
+    el('div', { class: 'tbl-wrap' }, el('table', {},
+      el('thead', {}, el('tr', {}, ['項目', '數量', '單位', '單價', '小計', ''].map((h, i) => el('th', { class: (i === 1 || i === 3 || i === 4) ? 'num' : '', text: h })))),
+      el('tbody', { id: 'extraBody' }))));
+}
+function renderExtras() {
+  const body = $('#extraBody'); if (!body) return;
+  body.textContent = ''; extraRefs = {};
+  const c = cur();
+  if (!c.extras.length) body.append(el('tr', {}, el('td', { colspan: '6', class: 'muted', text: '還沒有其他費用。運費、安裝、五金、搬運、吊車都在這裡加。' })));
+  c.extras.forEach(x => {
+    const sub = el('td', { class: 'num' }); extraRefs[x.id] = sub;
+    const on = k => e => { x[k] = (k === 'name' || k === 'unit') ? clip(e.target.value, k === 'unit' ? 10 : 60) : clip(normIn(e.target.value), 12); refreshExtra(x); refreshSummary(); scheduleSave(); };
+    const priceIn = el('input', { class: 'w-s', inputmode: 'decimal', value: x.price, onfocus: e => e.target.select(), oninput: e => { on('price')(e); priceIn.classList.toggle('todo', num(x.price) <= 0); } });
+    priceIn.classList.toggle('todo', num(x.price) <= 0);
+    body.append(el('tr', {},
+      el('td', {}, el('input', { class: 'w-l', value: x.name, placeholder: '項目名稱', oninput: on('name') })),
+      el('td', { class: 'num' }, el('input', { class: 'w-xs', inputmode: 'decimal', value: x.qty, onfocus: e => e.target.select(), oninput: on('qty') })),
+      el('td', {}, el('input', { class: 'w-xs', value: x.unit, oninput: on('unit') })),
+      el('td', { class: 'num' }, priceIn),
+      sub,
+      el('td', {}, el('button', { class: 'small danger', onclick: () => { c.extras.splice(c.extras.indexOf(x), 1); renderExtras(); refreshSummary(); scheduleSave(); } }, '刪除'))));
+    refreshExtra(x);
+  });
+}
+function refreshExtra(x) { const td = extraRefs[x.id]; if (td) td.textContent = money(Math.round(num(x.qty) * num(x.price))); }
+function quoteSection() {
+  const q = cur().quote;
+  const on = k => e => { q[k] = clip(normIn(e.target.value), 8); refreshSummary(); scheduleSave(); };
+  const rd = el('select', { class: 'w-m', id: 'qRound', onchange: e => { q.lineRound = e.target.value; refreshSummary(); scheduleSave(); } },
+    [['1', '1 元'], ['10', '10 元'], ['100', '100 元'], ['1000', '1,000 元']].map(([v, t]) => el('option', { value: v, text: t })));
+  rd.value = q.lineRound;
+  return el('div', {},
+    el('h2', { text: '報價設定' }),
+    el('div', { class: 'card' },
+      el('div', { class: 'row' },
+        field('報價倍率（成本 × 幾倍）', el('input', { class: 'w-s', id: 'qMult', inputmode: 'decimal', value: q.mult, oninput: on('mult'), onfocus: e => e.target.select() })),
+        field('預備金 %（破片、量錯重做）', el('input', { class: 'w-s', id: 'qRes', inputmode: 'decimal', value: q.reserve, oninput: on('reserve'), onfocus: e => e.target.select() })),
+        field('業主版每項金額進位到', rd),
+        el('label', { class: 'f', style: 'flex-direction:row;align-items:center;gap:8px;min-height:44px' },
+          el('input', { type: 'checkbox', id: 'qTax', checked: q.tax, onchange: e => { q.tax = e.target.checked; refreshSummary(); scheduleSave(); } }),
+          el('span', { style: 'font-size:1rem;color:var(--ink)', text: '加 5% 營業稅' }))),
+      el('div', { class: 'muted', text: '報價 ＝（成本 ＋ 預備金）× 倍率。每一項都用同一個比例放大再進位，所以業主版每項金額加起來剛好等於總價。' })));
+}
+function summarySection() {
+  return el('div', {},
+    el('h2', { text: '總結' }), el('div', { class: 'card', id: 'summary' }),
+    el('h2', { text: '防爆掉檢查' }), el('div', { class: 'card', id: 'checks' }));
+}
+function refreshSummary() {
+  const A = calcAll(), c = cur();
+  const box = $('#summary');
+  if (box) {
+    box.textContent = '';
+    const rows = [['玻璃材料', A.glass], ['磨邊（光邊／斜邊）', A.edge], ['開孔／R角／挖缺', A.proc], ['其他費用（運費、安裝、五金…）', A.extras]];
+    if (VENDOR) rows.push(['合計（未稅）', A.cost, 'big']);
+    else {
+      rows.push(['成本合計', A.cost, 'line'], [`預備金 ${fmt(A.resPct, 1)}%`, A.reserve], ['保本價（報價不能低於這個）', A.floor, 'line'],
+        [`報價（未稅，× ${fmt(A.mult, 2)}）`, A.quote, 'big']);
+      if (c.quote.tax) { rows.push(['營業稅 5%', A.tax]); rows.push(['含稅總價', A.grand, 'big']); }
+      rows.push(['毛利', A.profit, '', `（${fmt(A.margin * 100, 1)}%）`]);
+    }
+    const g = el('div', { class: 'sumgrid' });
+    rows.forEach(r => g.append(el('div', { class: 'k' + (r[2] === 'line' ? ' line' : ''), text: r[0] }), el('div', { class: 'v' + (r[2] === 'big' ? ' big' : '') + (r[2] === 'line' ? ' line' : ''), text: money(r[1]) + (r[3] || '') })));
+    const extraCai = A.bill - A.raw;
+    box.append(g, el('p', { id: 'caiNote' }, `共 ${A.cnt} 片，實際面積 ${fmt(A.raw)} 才，玻璃行計價 ${fmt(A.bill)} 才`,
+      extraCai > 0.005 ? el('b', { style: 'color:var(--warn)', text: `（進位＋最低才數多算 ${fmt(extraCai)} 才——只用總面積估就會漏掉這些錢）` }) : null,
+      A.bill ? (VENDOR ? `；平均每才 ${money(A.cost / A.bill)}（含運費、安裝、五金）` : `；平均每才報價 ${money(A.perCai)}（含運費、安裝、五金；網路行情：玻璃隔間連工帶料約 1,000～2,000/才）`) : ''));
+  }
+  const ck = $('#checks');
+  if (ck) {
+    ck.textContent = '';
+    if (!A.warns.length) ck.append(el('div', { class: 'msg ok', text: '✅ 沒有發現漏算項目' }));
+    else A.warns.forEach(w => ck.append(el('div', { class: 'msg ' + w.lv, text: icon(w.lv) + w.msg })));
+  }
+  const bad = A.warns.filter(w => w.lv === 'bad').length;
+  const bar = $('#bar'); bar.textContent = '';
+  if (VENDOR) {
+    bar.append(el('span', {}, `【${c.name}】`), el('span', {}, '合計（未稅） ', el('b', { text: money(A.cost) })),
+      el('span', {}, `計價 ${fmt(A.bill)} 才`),
+      bad ? el('span', { style: 'color:#ffb4b4;font-weight:700', text: `⛔ ${bad} 個漏算／錯誤` }) : '');
+    return A;
+  }
+  bar.append(
+    el('span', {}, `【${c.name}】`),
+    el('span', {}, '成本 ', el('b', { text: money(A.cost) })),
+    el('span', {}, '保本價 ', el('b', { text: money(A.floor) })),
+    el('span', {}, '報價 ', el('b', { id: 'barQuote', text: money(c.quote.tax ? A.grand : A.quote) }), c.quote.tax ? '（含稅）' : '（未稅）'),
+    el('span', {}, '毛利 ', el('b', { text: money(A.profit) }), `（${fmt(A.margin * 100, 1)}%）`),
+    bad ? el('span', { style: 'color:#ffb4b4;font-weight:700', text: `⛔ ${bad} 個漏算／錯誤` }) : '');
+  return A;
+}
+
+/* ---------------- ② 業主報價單 ---------------- */
+function descOf(p, r) {
+  const parts = [];
+  if (r.edgeType === 'polish' || r.edgeType === 'bevel') parts.push((SIDES[p.sides] || SIDES['4']).t + EDGES[r.edgeType]);
+  else if (r.edgeType === 'shape') parts.push('異形光邊');
+  r.procItems.forEach(x => parts.push((x.key === 'holeS' || x.key === 'holeL' ? '開孔' : x.name) + ' ' + x.cnt));
+  const merged = [];
+  parts.forEach(s => { const m = s.match(/^開孔 (\d+)$/); const prev = merged.findIndex(z => /^開孔 \d+$/.test(z)); if (m && prev >= 0) merged[prev] = '開孔 ' + (num(merged[prev].slice(3)) + num(m[1])); else merged.push(s); });
+  return (r.t ? r.t.name : '玻璃') + (merged.length ? '（' + merged.join('、') + '）' : '');
+}
+function clientRows(A) {
+  const c = cur(), o = c.clientOpt, rows = [];
+  let no = 0;
+  c.pieces.forEach((p, i) => {
+    const r = A.pieces[i]; if (r.empty || !r.total) return;
+    no++;
+    rows.push({ no, loc: p.loc, desc: descOf(p, r), size: `${fmt(r.w, 1)} × ${fmt(r.h, 1)}`, qty: `${r.qty} 片`, cai: r.bill * r.qty, amt: A.clientPieces[i] });
+  });
+  const ex = c.extras.map((x, j) => ({ x, amt: A.clientExtras[j] })).filter(z => z.amt > 0);
+  if (o.mergeExtras && ex.length) { no++; rows.push({ no, loc: '', desc: '五金、運費、安裝及雜項', size: '', qty: '1 式', cai: 0, amt: ex.reduce((a, z) => a + z.amt, 0) }); }
+  else ex.forEach(z => { no++; rows.push({ no, loc: '', desc: z.x.name, size: '', qty: `${fmt(num(z.x.qty))} ${z.x.unit}`, cai: 0, amt: z.amt }); });
+  return rows;
+}
+function renderClient() {
+  const root = $('#tab-client'); root.textContent = '';
+  const c = cur(), o = c.clientOpt, co = S.settings.company, A = calcAll();
+  const opt = (k, label) => el('label', { style: 'display:inline-flex;gap:8px;align-items:center;margin:0 22px 8px 0;font-size:1rem' },
+    el('input', { type: 'checkbox', 'data-opt': k, checked: o[k], onchange: e => { o[k] = e.target.checked; scheduleSave(); renderClient(); } }), label);
+  const bad = A.warns.filter(w => w.lv === 'bad');
+  const notesDiv = el('div', { class: 'notes', text: o.note });
+  root.append(el('div', { class: 'card no-print' },
+    bad.length ? el('div', { class: 'banner bad', text: `⛔ 還有 ${bad.length} 個漏算／錯誤沒處理（看「① 報價計算」最下面的防爆掉檢查），這份報價可能會爆掉` }) : null,
+    el('div', {}, opt('showSize', '顯示尺寸'), opt('showUnit', '顯示才數與每才單價（客人可以拿去比價，建議不要）'), opt('mergeExtras', '其他費用合併成一行')),
+    el('div', { class: 'row gap', style: 'margin-top:6px' },
+      el('button', { class: 'primary', id: 'btnPrint', onclick: () => window.print() }, '🖨 列印／存成 PDF'),
+      el('button', { id: 'btnCopyClient', onclick: () => copyText(clientTSV(A), '業主版') }, '複製業主版（貼到 Excel）'),
+      el('button', { id: 'btnCopyInternal', onclick: () => copyText(internalTSV(A), '內部成本明細') }, '複製內部成本明細（貼到 Excel）')),
+    el('div', { style: 'margin-top:10px' }, el('span', { class: 'muted', text: '報價單下方的備註（可以直接改）' }),
+      el('textarea', { id: 'clientNote', value: o.note, oninput: e => { o.note = clip(e.target.value, 2000); notesDiv.textContent = o.note; scheduleSave(); } }))));
+  const rows = clientRows(A);
+  const head = ['項次', '位置', '品項說明'];
+  if (o.showSize) head.push('尺寸（寬×高 公分）');
+  head.push('數量');
+  if (o.showUnit) head.push('才數', '每才');
+  head.push('金額');
+  const tb = el('tbody');
+  if (!rows.length) tb.append(el('tr', {}, el('td', { colspan: String(head.length), text: '（還沒有項目，請先到「① 報價計算」輸入）' })));
+  rows.forEach(r => {
+    const tds = [el('td', { text: String(r.no) }), el('td', { text: r.loc }), el('td', { text: r.desc })];
+    if (o.showSize) tds.push(el('td', { text: r.size }));
+    tds.push(el('td', { class: 'num', text: r.qty }));
+    if (o.showUnit) tds.push(el('td', { class: 'num', text: r.cai ? fmt(r.cai) : '' }), el('td', { class: 'num', text: r.cai ? money(r.amt / r.cai) : '' }));
+    tds.push(el('td', { class: 'num', text: money(r.amt) }));
+    tb.append(el('tr', {}, tds));
+  });
+  const span = head.length - 1;
+  const tot = (label, v) => el('tr', { class: 'total' }, el('td', { colspan: String(span), style: 'text-align:right', text: label }), el('td', { class: 'num', text: money(v) }));
+  tb.append(tot(c.quote.tax ? '合計（未稅）' : '合計', A.quote));
+  if (c.quote.tax) { tb.append(tot('營業稅 5%', A.tax)); tb.append(tot('總計（含稅）', A.grand)); }
+  root.append(el('div', { id: 'sheet' },
+    el('h1', { text: '報價單' }),
+    el('div', { class: 'co', text: `${co.name}　負責人：${co.boss}　地址：${co.addr}　電話：${co.tel}` }),
+    el('div', { class: 'meta' }, el('span', { text: '案名：' + c.name }), el('span', { text: '業主：' + (c.client || '') }), el('span', { text: '日期：' + (c.date || '') })),
+    el('table', {}, el('thead', {}, el('tr', {}, head.map(h => el('th', { text: h })))), tb),
+    el('div', { style: 'font-weight:700;margin-top:10px', text: c.quote.tax ? '本報價含 5% 營業稅。' : '本報價為未稅價。' }),
+    notesDiv,
+    el('div', { class: 'sign' }, el('span', { text: '業主確認簽名：＿＿＿＿＿＿＿＿' }), el('span', { text: '日期：＿＿＿＿＿＿' }))));
+}
+function clientTSV(A) {
+  const c = cur(), o = c.clientOpt, rows = clientRows(A);
+  const head = ['項次', '位置', '品項說明']; if (o.showSize) head.push('尺寸（寬×高 公分）'); head.push('數量'); if (o.showUnit) head.push('才數', '每才'); head.push('金額');
+  const L = [['報價單'], ['案名', c.name, '業主', c.client, '日期', c.date], [], head];
+  rows.forEach(r => { const a = [r.no, r.loc, r.desc]; if (o.showSize) a.push(r.size); a.push(r.qty); if (o.showUnit) a.push(r.cai ? rnd(r.cai, 2) : '', r.cai ? Math.round(r.amt / r.cai) : ''); a.push(r.amt); L.push(a); });
+  const pad = head.length - 2, blank = Array(pad).fill('');
+  L.push([]);
+  L.push(['', ...blank, c.quote.tax ? '合計（未稅）' : '合計', A.quote].slice(-head.length));
+  if (c.quote.tax) { L.push(['', ...blank, '營業稅 5%', A.tax].slice(-head.length)); L.push(['', ...blank, '總計（含稅）', A.grand].slice(-head.length)); }
+  return toTSV(L);
+}
+function internalTSV(A) {
+  const c = cur();
+  const L = [['玻璃報價內部成本明細（請勿給業主）'], ['案名', c.name, '業主', c.client, '日期', c.date], [],
+    ['項次', '位置', '玻璃種類', '寬cm', '高cm', '片數', '實際才數/片', '計價才數/片', '每才單價', '玻璃費', '磨邊', '磨邊尺數/片', '磨邊單價', '磨邊費', '加工內容', '加工費', '成本小計', '業主報價']];
+  c.pieces.forEach((p, i) => {
+    const r = A.pieces[i]; if (r.empty) return;
+    const edgeName = r.edgeType === 'none' ? '不磨' : r.edgeType === 'shape' ? '異形光邊' : (SIDES[p.sides] || SIDES['4']).t + EDGES[r.edgeType];
+    L.push([i + 1, p.loc, r.t ? r.t.name : '', r.w, r.h, r.qty, rnd(r.raw, 2), rnd(r.bill, 2), rnd(r.unitEff, 1), r.glassT, edgeName,
+      r.edgeType === 'shape' || r.edgeType === 'none' ? '' : rnd(r.edgeLenR, 2), rnd(r.edgePrice, 1), r.edgeT,
+      r.procItems.map(x => `${x.name}${x.cnt}`).join('、'), r.procT, r.total, A.clientPieces[i]]);
+  });
+  c.extras.forEach((x, j) => L.push(['', x.name, '其他費用', '', '', `${x.qty} ${x.unit}`, '', '', num(x.price), '', '', '', '', '', '', '', A.extraRows[j], A.clientExtras[j]]));
+  L.push([]);
+  L.push(['', '成本合計', A.cost]); L.push(['', `預備金 ${A.resPct}%`, A.reserve]); L.push(['', '保本價', A.floor]);
+  L.push(['', `報價（× ${A.mult}）`, A.quote]); if (c.quote.tax) { L.push(['', '營業稅 5%', A.tax]); L.push(['', '含稅總價', A.grand]); }
+  L.push(['', '毛利', A.profit, `${rnd(A.margin * 100, 1)}%`]);
+  L.push(['', '實際才數', rnd(A.raw, 2), '計價才數', rnd(A.bill, 2)]);
+  return toTSV(L);
+}
+
+/* ---------------- ③ 玻璃單價表 ---------------- */
+function renderTypes() {
+  const root = $('#tab-types'); root.textContent = '';
+  const st = S.settings;
+  const body = el('tbody');
+  S.glassTypes.forEach((t, i) => {
+    const on = (k, isNum) => e => {
+      if (isNum) { t[k] = (k === 'minCai' && e.target.value.trim() === '') ? '' : num(e.target.value); if (k !== 'minCai') e.target.classList.toggle('todo', num(t[k]) <= 0); }
+      else t[k] = clip(e.target.value, k === 'note' ? 200 : 60);
+      scheduleSave();
+    };
+    const ni = (k, cls) => { const inp = el('input', { class: cls || 'w-xs', 'data-k': k, inputmode: 'decimal', value: String(t[k]), oninput: on(k, true), onfocus: e => e.target.select() }); if (num(t[k]) <= 0) inp.classList.add('todo'); return inp; };
+    body.append(el('tr', { 'data-id': t.id },
+      el('td', {}, el('input', { class: 'w-l', 'data-k': 'name', value: t.name, oninput: on('name') })),
+      el('td', {}, ni('thick')),
+      el('td', {}, ni('price', 'w-s')),
+      el('td', { style: 'text-align:center' }, el('input', { type: 'checkbox', 'data-k': 'tempered', checked: t.tempered, onchange: e => { t.tempered = e.target.checked; scheduleSave(); } })),
+      el('td', {}, el('input', { class: 'w-xs', 'data-k': 'minCai', inputmode: 'decimal', value: t.minCai === '' ? '' : String(t.minCai), placeholder: String(st.minCai), oninput: on('minCai', true) })),
+      el('td', {}, ni('edge')),
+      el('td', {}, ni('bevel')),
+      el('td', {}, el('input', { class: 'w-l', 'data-k': 'note', value: t.note, oninput: on('note') })),
+      el('td', { style: 'white-space:nowrap' },
+        el('button', { class: 'small', title: '往上移', disabled: i === 0, onclick: () => { [S.glassTypes[i - 1], S.glassTypes[i]] = [S.glassTypes[i], S.glassTypes[i - 1]]; scheduleSave(); renderTypes(); } }, '↑'), ' ',
+        el('button', { class: 'small danger', onclick: () => askConfirm(`刪除「${t.name}」？已經用到它的玻璃項目會變成「請選擇玻璃種類」。`, '刪除').then(ok => {
+          if (!ok) return; const k = S.glassTypes.indexOf(t); if (k >= 0) S.glassTypes.splice(k, 1); scheduleSave(); renderTypes(); }) }, '刪除'))));
+  });
+  root.append(
+    el('h2', { text: VENDOR ? '玻璃單價表（請填您的價格）' : '玻璃單價表（成本價：玻璃行給你的價錢）' }),
+    el('div', { class: st.pricesChecked ? 'banner ok' : (VENDOR ? 'banner warn' : 'banner bad') },
+      el('label', { style: 'display:flex;gap:12px;align-items:center;font-size:1.05rem;cursor:pointer' },
+        el('input', { type: 'checkbox', id: 'chkPrices', checked: st.pricesChecked, onchange: e => { st.pricesChecked = e.target.checked; scheduleSave(); renderTypes(); } }),
+        st.pricesChecked ? (VENDOR ? '✅ 價格已經填好' : '✅ 已核對成配合玻璃行的價格')
+          : (VENDOR ? '請把黃底的格子填上您的價格（沒有做的品項可以刪除），填好在這裡打勾' : '⛔ 目前是「網路行情參考值」（多取高標）。改成你玻璃行的價格後，在這裡打勾'))),
+    el('p', { class: 'muted', text: '黃底＝還沒填的價錢（0 元），用到就會漏算。「最低才數」空白＝用「⑤ 計價規則」的預設值（有的店強化玻璃 3 才起算，就在那一列填 3）。光邊、斜邊單價是「每尺」，量周長。如果玻璃行是「清玻價＋強化費」分開報，兩個加起來填在強化那一列。「強化」打勾的會檢查強化爐尺寸、提醒孔位要先做。' }),
+    el('div', { class: 'tbl-wrap' }, el('table', { id: 'typesTable' },
+      el('thead', {}, el('tr', {}, ['玻璃種類名稱', '厚度mm', '每才單價', '強化', '最低才數', '光邊/尺', '斜邊/尺', VENDOR ? '備註' : '網路行情備註', ''].map(h => el('th', { text: h })))), body)),
+    el('div', { class: 'row gap', style: 'margin-top:12px' },
+      el('button', { class: 'primary', id: 'btnAddType', onclick: () => { S.glassTypes.push({ id: uid(), name: '新玻璃種類', thick: 5, price: 0, tempered: false, edge: 0, bevel: 0, minCai: '', note: '' }); scheduleSave(); renderTypes(); } }, '＋ 新增玻璃種類'),
+      VENDOR ? '' : el('button', { class: 'danger', id: 'btnResetTypes', onclick:() => askConfirm('把玻璃單價表恢復成網路行情參考值？你改過的價錢、自己加的種類都會被蓋掉（建議先到「⑤ 計價規則與備份」匯出備份）。', '恢復').then(ok => {
+        if (!ok) return; S.glassTypes = makeTypes(); S.settings.pricesChecked = false; scheduleSave(); renderTypes(); toast('已恢復網路參考值'); }) }, '恢復網路參考值')));
+}
+
+/* ---------------- ④ 加工與其他費用 ---------------- */
+function renderProcs() {
+  const root = $('#tab-procs'); root.textContent = '';
+  const pb = el('tbody');
+  S.procs.forEach(p => {
+    const inp = el('input', { class: 'w-s', inputmode: 'decimal', 'data-k': p.key, value: String(p.price), onfocus: e => e.target.select(), oninput: e => { p.price = num(e.target.value); inp.classList.toggle('todo', p.price <= 0); scheduleSave(); } });
+    inp.classList.toggle('todo', num(p.price) <= 0);
+    pb.append(el('tr', {}, el('td', { text: p.name }), el('td', { style: 'white-space:nowrap' }, inp, ` 元／${p.unit}`),
+      el('td', {}, el('input', { class: 'w-xl', value: p.note, oninput: e => { p.note = clip(e.target.value, 200); scheduleSave(); } }))));
+  });
+  const eb = el('tbody');
+  S.extrasLib.forEach(x => {
+    const inp = el('input', { class: 'w-s', inputmode: 'decimal', value: String(x.price), onfocus: e => e.target.select(), oninput: e => { x.price = num(e.target.value); inp.classList.toggle('todo', x.price <= 0); scheduleSave(); } });
+    inp.classList.toggle('todo', num(x.price) <= 0);
+    eb.append(el('tr', {},
+      el('td', {}, el('input', { class: 'w-l', value: x.name, oninput: e => { x.name = clip(e.target.value, 60); scheduleSave(); } })),
+      el('td', {}, el('input', { class: 'w-xs', value: x.unit, oninput: e => { x.unit = clip(e.target.value, 10); scheduleSave(); } })),
+      el('td', {}, inp),
+      el('td', {}, el('input', { class: 'w-xl', value: x.note, oninput: e => { x.note = clip(e.target.value, 200); scheduleSave(); } })),
+      el('td', {}, el('button', { class: 'small danger', onclick: () => { S.extrasLib.splice(S.extrasLib.indexOf(x), 1); scheduleSave(); renderProcs(); } }, '刪除'))));
+  });
+  root.append(
+    el('h2', { text: '加工單價（每個玻璃項目填數量就會自動算）' }),
+    el('p', { class: 'muted', text: '光邊、斜邊每尺單價跟厚度有關，在「③ 玻璃單價表」每一列設定。黃底＝還沒填（0 元），用到就會被列為漏算。' }),
+    el('div', { class: 'tbl-wrap' }, el('table', { id: 'procTable' }, el('thead', {}, el('tr', {}, ['加工項目', '單價', '備註'].map(h => el('th', { text: h })))), pb)),
+    el('h2', { text: '其他費用庫（在「① 報價計算」的其他費用可以直接選）' }),
+    el('p', { class: 'muted', text: '這裡改的是「預設單價」。已經加進案件的費用不會跟著變，要改請在案件裡改。' }),
+    el('div', { class: 'tbl-wrap' }, el('table', {}, el('thead', {}, el('tr', {}, ['項目', '單位', '單價', '備註', ''].map(h => el('th', { text: h })))), eb)),
+    el('div', { class: 'row gap', style: 'margin-top:12px' },
+      el('button', { class: 'primary', onclick: () => { S.extrasLib.push({ id: uid(), name: '新費用', unit: '式', price: 0, note: '' }); scheduleSave(); renderProcs(); } }, '＋ 新增費用項目'),
+      VENDOR ? '' : el('button', { class: 'danger', onclick: () => askConfirm('把加工單價與其他費用庫恢復成網路行情參考值？你改過的會被蓋掉。', '恢復').then(ok => {
+        if (!ok) return; S.procs = makeProcs(); S.extrasLib = makeExtras(); scheduleSave(); renderProcs(); toast('已恢復網路參考值'); }) }, '恢復網路參考值')));
+}
+
+/* ---------------- ⑤ 計價規則與備份 ---------------- */
+const BASE_OPTS = [['30.3', '1 尺＝30.3 公分（台尺，1 才＝918.09 平方公分）'], ['30', '1 尺＝30 公分（快速算法，1 才＝900 平方公分）']];
+const SIDE_OPTS = [['none', '不進位'], ['0.1', '每邊進位到整「寸」（約 3 公分）'], ['0.5', '每邊進位到半尺'], ['1', '每邊進位到整尺']];
+const CAI_OPTS = [['none', '不進位（算到小數兩位）'], ['0.1', '進位到 0.1 才'], ['0.5', '進位到 0.5 才'], ['1', '無條件進位到整才']];
+const EDGE_ROUND_OPTS = [['none', '不進位（算到小數一位）'], ['0.5', '進位到半尺'], ['1', '進位到整尺']];
+const optText = (opts, v) => (opts.find(o => o[0] === String(v)) || ['', String(v)])[1];
+function ruleText(ru) { return `${num(ru.base) === 30 ? '1尺＝30公分' : '1尺＝30.3公分'}／${optText(SIDE_OPTS, ru.sideRound)}／才數${optText(CAI_OPTS, ru.caiRound)}`; }
+function renderRules() {
+  const root = $('#tab-rules'); root.textContent = '';
+  const st = S.settings;
+  const ex = el('div', { class: 'msg info', id: 'ruleExample' });
+  const updEx = () => {
+    const a = caiOf(90, 180, st), b = caiOf(30, 30, st), d = caiOf(60, 60, st);
+    ex.textContent = `照目前規則試算：90×180 公分＝${fmt(a)} 才；60×60＝${fmt(d)} 才；30×30＝${fmt(b)} 才 → 套最低 ${fmt(num(st.minCai))} 才後計 ${fmt(Math.max(b, num(st.minCai)))} 才`;
+  };
+  const sel = (label, key, opts) => {
+    const s = el('select', { class: 'w-xl', 'data-k': key, onchange: e => { st[key] = key === 'base' ? num(e.target.value) : e.target.value; scheduleSave(); updEx(); } }, opts.map(([v, t]) => el('option', { value: v, text: t })));
+    s.value = String(st[key]); return field(label, s);
+  };
+  const nf = (label, key, cls) => field(label, el('input', { class: cls || 'w-s', 'data-k': key, inputmode: 'decimal', value: String(st[key]), onfocus: e => e.target.select(), oninput: e => { st[key] = num(e.target.value); scheduleSave(); updEx(); } }));
+  // 規則對照器
+  const samples = [0, 1, 2].map(() => ({ w: el('input', { class: 'w-s', inputmode: 'decimal', placeholder: '寬 公分' }), h: el('input', { class: 'w-s', inputmode: 'decimal', placeholder: '高 公分' }), c: el('input', { class: 'w-s', inputmode: 'decimal', placeholder: '才數' }) }));
+  const out = el('div', { id: 'matchOut' });
+  const findRules = () => {
+    out.textContent = '';
+    const ss = samples.map(s => ({ w: num(s.w.value), h: num(s.h.value), c: num(s.c.value) })).filter(s => s.w > 0 && s.h > 0 && s.c > 0);
+    if (!ss.length) { out.append(el('div', { class: 'msg bad', text: '至少要填一片的寬、高、玻璃行算的才數' })); return; }
+    const matches = [];
+    for (const base of [30.3, 30]) for (const sr of SIDE_OPTS.map(o => o[0])) for (const cr of CAI_OPTS.map(o => o[0])) {
+      const ru = { base, sideRound: sr, caiRound: cr };
+      if (ss.every(s => Math.abs(caiOf(s.w, s.h, ru) - s.c) < 0.006)) matches.push(ru);
+    }
+    if (!matches.length) {
+      out.append(el('div', { class: 'msg warn', text: '沒有一組算法對得上。可能是：① 這片小於最低才數（例如算出 0.6 才、玻璃行收 1 才）② 玻璃行每邊另外加尺寸或用別的算法。把那張估價單拍給 Claude 看，可以幫你加新的算法。' }));
+      ss.forEach(s => out.append(el('div', { class: 'muted', text: `目前規則：${fmt(s.w, 1)}×${fmt(s.h, 1)} 公分＝${fmt(caiOf(s.w, s.h, st))} 才（玻璃行寫 ${fmt(s.c)} 才）` })));
+      return;
+    }
+    if (matches.length === 1) out.append(el('div', { class: 'msg ok', text: '✅ 只有 1 組算法對得上，就是這組：' }));
+    else {
+      // 找一個「各組算法答案最不一樣」的尺寸，讓使用者拿去對
+      const cand = [35, 45, 55, 65, 75, 85, 95, 105, 115, 125, 135, 145, 155, 165, 175, 185, 195, 215];
+      let best = null;
+      for (const w of cand) for (const h of cand) {
+        if (h < w) continue;
+        const vals = new Set(matches.map(ru => caiOf(w, h, ru)));
+        if (!best || vals.size > best.n) best = { w, h, n: vals.size, vals: [...vals].sort((a, b) => a - b) };
+      }
+      if (best && best.n > 1) out.append(el('div', { class: 'msg warn', text: `你填的這幾片，有 ${matches.length} 組算法都算得出一樣的才數，還分不出玻璃行用哪一組。` }));
+      else out.append(el('div', { class: 'msg ok', id: 'matchHint', text: `✅ 對得上的 ${matches.length} 組算法，在常見尺寸算出來都一樣，套用第一組就可以。` }));
+      if (best && best.n > 1) out.append(el('div', { class: 'msg info', id: 'matchHint', text: `請在估價單上找一片接近 ${best.w} × ${best.h} 公分的（或直接問玻璃行這個尺寸算幾才），再填進上面。照不同算法會是：${best.vals.map(v => fmt(v)).join('、')} 才，一填就分得出來。` }));
+      out.append(el('div', { class: 'muted', text: '目前對得上的算法：' }));
+    }
+    matches.forEach(ru => {
+      const same = num(ru.base) === num(st.base) && ru.sideRound === st.sideRound && ru.caiRound === st.caiRound;
+      out.append(el('div', { class: 'row gap', style: 'margin:6px 0;align-items:center' },
+        el('span', { text: ruleText(ru) + (same ? '　← 目前用的就是這組' : '') }),
+        same ? null : el('button', { class: 'small primary', onclick: () => { st.base = ru.base; st.sideRound = ru.sideRound; st.caiRound = ru.caiRound; scheduleSave(); renderRules(); toast('已套用：' + ruleText(ru)); } }, '套用這組')));
+    });
+  };
+  const fileIn = el('input', { type: 'file', accept: '.json,application/json', id: 'importFile', style: 'display:none', onchange: e => { importFile(e.target.files[0]); e.target.value = ''; } });
+  const co = st.company;
+  const cf = (label, k) => field(label, el('input', { class: 'w-l', value: co[k], oninput: e => { co[k] = clip(e.target.value, 100); scheduleSave(); } }));
+  root.append(
+    el('h2', { text: '才數怎麼算（照你配合的玻璃行設定）' }),
+    el('div', { class: 'card' },
+      el('div', { class: 'row' }, sel('一尺等於幾公分', 'base', BASE_OPTS), sel('每邊尺寸要不要先進位', 'sideRound', SIDE_OPTS)),
+      el('div', { class: 'row' }, sel('每片才數進位', 'caiRound', CAI_OPTS), nf('每片最低才數（未滿算這個數）', 'minCai')),
+      el('div', { class: 'row' }, nf('大片：單片超過幾才', 'bigCai'), nf('大片每才加價 %', 'bigPct'), sel('光邊／斜邊尺數每片進位', 'edgeRound', EDGE_ROUND_OPTS)),
+      el('div', { class: 'row' }, nf('強化最大尺寸：短邊（公分）', 'maxShort'), nf('長邊（公分）', 'maxLong'), nf('單片超過幾公斤提醒多人搬', 'wWarn'), nf('超過幾公斤提醒吊車', 'wHeavy')),
+      ex,
+      el('p', { class: 'muted', text: VENDOR ? '預設是：每片各自算才數、無條件進位到整才、未滿 1 才算 1 才、單片超過 25 才算大片。跟您的算法不一樣就直接改，或用下面的「規則對照器」。' : '預設值的根據：多數玻璃行「每片各自」算才數、無條件進位到整才、未滿 1 才算 1 才；單片超過 25 才算大片（某玻璃行 10mm 強化從 184 漲到 245，約 +33%）。每家玻璃行不同，請用下面的「規則對照器」對一張估價單。' })),
+    el('h2', { text: '規則對照器：拿玻璃行的估價單反推它的算法' }),
+    el('div', { class: 'card' },
+      el('p', { text: '從玻璃行的估價單抄 1～3 片：寬、高（公分）和它寫的才數。程式會試遍所有算法，告訴你哪一組跟玻璃行一樣。' }),
+      samples.map((s, i) => el('div', { class: 'row' }, el('span', { style: 'min-width:70px;margin:0 10px 18px 0', text: `第 ${i + 1} 片` }), field('寬', s.w), field('高', s.h), field('玻璃行算的才數', s.c))),
+      el('button', { class: 'primary', id: 'btnFindRule', onclick: findRules }, '找出符合的算法'),
+      out),
+    el('h2', { text: VENDOR ? '把單價傳給集思' : '單價表交換（給玻璃工班填）' }),
+    priceShareCard(),
+    VENDOR ? '' : el('h2', { text: '報價單抬頭（公司資料）' }),
+    VENDOR ? '' : el('div', { class: 'card' }, el('div', { class: 'row' }, cf('公司名稱', 'name'), cf('負責人', 'boss'), cf('地址', 'addr'), cf('電話', 'tel'))),
+    VENDOR ? '' : el('h2', { text: '資料備份' }),
+    VENDOR ? '' : el('div', { class: 'card' },
+      el('p', { text: '資料只存在這台電腦的這個瀏覽器裡。換電腦、清瀏覽器資料之前，先匯出備份檔（.json）；之後用「匯入備份」就能還原。備份檔含成本價，不要傳給業主。' }),
+      el('div', { class: 'row gap' },
+        el('button', { class: 'primary', id: 'btnExport', onclick: exportAll }, '⬇ 匯出備份'),
+        el('button', { id: 'btnImport', onclick: () => fileIn.click() }, '⬆ 匯入備份'), fileIn)));
+  updEx();
+}
+/* ---------------- 單價表交換（工班版 → 本機版） ---------------- */
+const VENDOR_URL = 'https://fooicebo-wq.github.io/glass-quote/';
+const PRICE_TAG = '【集思玻璃單價表】';
+function pricesText() {
+  const st = S.settings;
+  const data = { app: 'gis-glass-quote', kind: 'prices', v: 1, d: today(),
+    r: [st.base, st.sideRound, st.caiRound, st.minCai, st.bigCai, st.bigPct, st.edgeRound, st.maxShort, st.maxLong],
+    g: S.glassTypes.map(t => [t.id, t.name, t.thick, t.price, t.tempered ? 1 : 0, t.edge, t.bevel, t.minCai === '' ? '' : t.minCai]),
+    p: S.procs.map(p => [p.key, p.price]),
+    x: S.extrasLib.map(x => [x.id, x.name, x.unit, x.price]) };
+  return PRICE_TAG + (VENDOR ? '工班填寫 ' : '') + today() + '\n' + JSON.stringify(data);
+}
+function importPricesText(text) {
+  const s = String(text || '');
+  if (s.length > 200000) { toast('這段文字太長，不像是單價表'); return; }
+  const i = s.indexOf('{'), j = s.lastIndexOf('}');
+  let d = null;
+  if (i >= 0 && j > i) { try { d = JSON.parse(s.slice(i, j + 1)); } catch (e) { d = null; } }
+  if (!d || d.app !== 'gis-glass-quote' || d.kind !== 'prices' || !Array.isArray(d.g)) { toast(`讀不懂這段文字，請確認是完整的「${PRICE_TAG}」整段`); return; }
+  const day = clip(d.d, 12), tag = `工班提供（${day}）`;
+  const g = d.g.slice(0, 300).filter(Array.isArray).map(a => ({ id: clip(a[0] || uid(), 40), name: clip(a[1], 60), thick: num(a[2]), price: num(a[3]), tempered: !!a[4],
+    edge: num(a[5]), bevel: num(a[6]), minCai: (a[7] === '' || a[7] == null) ? '' : num(a[7]), note: tag }));
+  if (!g.length) { toast('這份單價表裡沒有玻璃種類'); return; }
+  const zero = g.filter(t => t.price <= 0).length;
+  askConfirm(`要用這份單價表（${day}，${g.length} 種玻璃）取代目前的玻璃單價、加工單價、費用庫和計價規則嗎？案件不會動。` +
+    (zero ? `\n注意：其中 ${zero} 種玻璃師傅沒填價格，匯入後會是 0 元（黃底），用到會被列為漏算，要再跟師傅問。` : ''), '匯入').then(ok => {
+    if (!ok) return;
+    S.glassTypes = g;
+    if (Array.isArray(d.p)) d.p.forEach(a => { if (!Array.isArray(a)) return; const p = S.procs.find(x => x.key === a[0]); if (p) { p.price = num(a[1]); p.note = tag; } });
+    if (Array.isArray(d.x)) {
+      const x = d.x.slice(0, 300).filter(Array.isArray).map(a => ({ id: clip(a[0] || uid(), 40), name: clip(a[1], 60), unit: clip(a[2], 10), price: num(a[3]), note: tag }));
+      if (x.length) S.extrasLib = x;
+    }
+    if (Array.isArray(d.r) && d.r.length >= 9) {
+      const r = d.r, st = S.settings;
+      if (num(r[0]) === 30 || num(r[0]) === 30.3) st.base = num(r[0]);
+      if (SIDE_OPTS.some(o => o[0] === String(r[1]))) st.sideRound = String(r[1]);
+      if (CAI_OPTS.some(o => o[0] === String(r[2]))) st.caiRound = String(r[2]);
+      if (EDGE_ROUND_OPTS.some(o => o[0] === String(r[6]))) st.edgeRound = String(r[6]);
+      st.minCai = Math.max(0, num(r[3])); st.bigCai = Math.max(0, num(r[4])); st.bigPct = Math.max(0, num(r[5]));
+      if (num(r[7]) > 0) st.maxShort = num(r[7]);
+      if (num(r[8]) > 0) st.maxLong = num(r[8]);
+    }
+    S.settings.pricesChecked = true;
+    saveNow(); renderRules(); toast('已匯入工班的單價表（案件沒有動）');
+  });
+}
+function priceShareCard() {
+  const copyBtn = el('button', { class: 'primary', id: 'btnCopyPrices', onclick: () => copyText(pricesText(), '單價表', VENDOR ? '到 LINE 對話框長按「貼上」傳給集思就可以了' : '') },
+    VENDOR ? '📋 複製單價表（貼到 LINE 傳給集思）' : '📋 複製目前的單價表');
+  if (VENDOR) return el('div', { class: 'card' },
+    el('p', { text: '單價和計價規則改好之後，按下面的按鈕，再到 LINE 跟我們的對話框長按「貼上」送出就可以了。' }),
+    copyBtn);
+  const ta = el('textarea', { id: 'priceIn', placeholder: `把工班從 LINE 傳來的「${PRICE_TAG}…」整段貼在這裡` });
+  return el('div', { class: 'card' },
+    el('p', {}, '工班版網址（可以直接傳給玻璃師傅）：',
+      el('a', { href: VENDOR_URL, target: '_blank', rel: 'noopener noreferrer', text: VENDOR_URL }),
+      el('button', { class: 'small', style: 'margin-left:10px', id: 'btnCopyVendorUrl', onclick: () => copyText(VENDOR_URL, '工班版網址', '到 LINE 貼上傳給師傅') }, '複製網址')),
+    el('p', { class: 'muted', text: '工班版看不到報價倍率、毛利、業主報價單。師傅在那邊改好單價、按「複製單價表」貼到 LINE 傳給你；你把整段貼到下面按「匯入單價表」，只換玻璃單價、加工單價、費用庫和計價規則，案件不會動。' }),
+    ta,
+    el('div', { class: 'row gap', style: 'margin-top:8px' },
+      el('button', { class: 'primary', id: 'btnPastePrices', onclick: () => importPricesText(ta.value) }, '⬇ 匯入單價表（案件不動）'),
+      copyBtn));
+}
+function exportAll() {
+  saveNow();
+  const data = JSON.stringify(Object.assign({ app: 'gis-glass-quote', exported: new Date().toISOString() }, S), null, 1);
+  const url = URL.createObjectURL(new Blob([data], { type: 'application/json' }));
+  const a = el('a', { href: url, download: `玻璃報價備份_${today()}.json`, style: 'display:none' });
+  document.body.append(a); a.click();
+  setTimeout(() => { URL.revokeObjectURL(url); a.remove(); }, 1500);
+  toast('已匯出備份檔（通常在「下載」資料夾）');
+}
+function importFile(file) {
+  if (!file) return;
+  if (file.size > 5e6) { toast('檔案太大，不像是這個程式的備份檔'); return; }
+  const fr = new FileReader();
+  fr.onload = () => {
+    let d; try { d = JSON.parse(String(fr.result)); } catch (e) { toast('讀不懂這個檔案（不是備份檔）'); return; }
+    if (!d || d.app !== 'gis-glass-quote') { toast('這不是玻璃報價計算器的備份檔'); return; }
+    const n = d.cases && typeof d.cases === 'object' ? Object.keys(d.cases).length : 0;
+    askConfirm(`要用備份檔取代目前全部資料嗎？（備份檔裡有 ${n} 個案件）目前的資料會被蓋掉。`, '取代').then(ok => {
+      if (!ok) return; S = sanitizeState(d); ensureCase(); undo = null; saveNow(); renderRules(); refreshSummary(); toast('已匯入備份');
+    });
+  };
+  fr.readAsText(file);
+}
+
+/* ---------------- 分頁 ---------------- */
+function showTab(name) {
+  document.querySelectorAll('#tabs button').forEach(b => b.classList.toggle('on', b.dataset.tab === name));
+  document.querySelectorAll('.tab').forEach(s => s.classList.toggle('on', s.id === 'tab-' + name));
+  if (name === 'calc') renderCalc();
+  else if (name === 'client') renderClient();
+  else if (name === 'types') renderTypes();
+  else if (name === 'procs') renderProcs();
+  else if (name === 'rules') renderRules();
+  refreshSummary();
+  window.scrollTo(0, 0);
+}
+document.querySelectorAll('#tabs button').forEach(b => b.addEventListener('click', () => showTab(b.dataset.tab)));
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && $('#modalBg').style.display === 'flex') closeModal(); });
+// 在任何分頁按 Ctrl+P 都印業主報價單（不然沒開過②分頁會印出空白頁）
+window.addEventListener('beforeprint', () => { if (VENDOR) return; if (!$('#tab-client').classList.contains('on') || !$('#sheet')) renderClient(); });
+if (VENDOR) {
+  document.body.classList.add('vendor');
+  document.title = '玻璃計價方式｜集思室內設計（工班版）';
+  const h1 = $('header h1'); if (h1) { h1.textContent = '玻璃計價方式'; h1.append(el('small', { text: '集思室內設計・工班版' })); }
+  const cb = $('#tabs button[data-tab="client"]'); if (cb) cb.remove();
+  const tr = $('#tabs button[data-tab="rules"]'); if (tr) tr.textContent = '⑤ 計價規則';
+  const th = $('#tabs button[data-tab="help"]'); if (th) th.textContent = '⑥ 使用說明';
+  ['#helpSteps', '#helpData', '#helpReasons', '#helpMarket'].forEach(s => { const n = $(s); if (n) n.style.display = 'none'; });
+  const hv = $('#helpVendor'); if (hv) hv.style.display = '';
+}
+$('#modalBg').addEventListener('click', e => { if (e.target.id === 'modalBg') closeModal(); });
+
+/* ---------------- 啟動 ---------------- */
+load();
+if (!storageOK) showStorageWarn();
+renderCalc();
+// 給驗收測試用（唯讀計算函式）
+window.__glass = { calcPiece: p => calcPiece(p), calcAll: () => calcAll(), caiOf: (w, h, ru) => caiOf(w, h, ru || S.settings), parsePasteLine, state: () => S };
+})();
+</script>
+</body>
+</html>
