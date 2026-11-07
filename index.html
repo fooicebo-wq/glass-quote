@@ -61,6 +61,8 @@ td.num,th.num{text-align:right;white-space:nowrap}
 .sumgrid .line{border-top:1px solid var(--line);padding-top:4px}
 .bar{position:fixed;left:0;right:0;bottom:0;background:var(--bar);color:#fff;padding:12px 20px;display:flex;flex-wrap:wrap;gap:6px 30px;font-size:1.12rem;z-index:20;box-shadow:0 -3px 10px rgba(0,0,0,.2)}
 .bar b{font-size:1.35rem;color:#ffe08a}
+.bar .sendBtn{background:#06c755;color:#fff;border:0;border-radius:10px;padding:8px 18px;font-size:1.15rem;font-weight:700;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,.3)}
+body.vendor{padding-bottom:180px}
 .banner{border-radius:10px;padding:12px 16px;margin:10px 0;font-size:1rem}
 .banner.warn{background:var(--warn-bg);border:2px solid #f0b766;color:var(--warn)}
 .banner.bad{background:var(--bad-bg);border:2px solid #f19a9a;color:var(--bad)}
@@ -101,6 +103,7 @@ td.num,th.num{text-align:right;white-space:nowrap}
  .tabs button{padding:8px 12px;font-size:.98rem}
  .bar{padding:8px 12px;gap:2px 16px;font-size:1rem}
  .bar b{font-size:1.15rem}
+ .bar .sendBtn{width:100%;font-size:1.12rem;padding:10px}
  .piece{padding:10px 12px}
  #sheet{padding:16px 12px}
 }
@@ -133,7 +136,7 @@ td.num,th.num{text-align:right;white-space:nowrap}
    <li>在「① 報價計算」輸入幾片您做過的尺寸（寬、高、片數、磨邊、開孔），看算出來的才數、光邊尺數、開孔費，跟您平常的算法一不一樣。</li>
    <li>算法不一樣的話，到「⑤ 計價規則」調整：一尺用 30.3 還是 30 公分、每邊要不要先進位、才數怎麼進位、最低幾才。也可以用「規則對照器」：填您估價單上的尺寸和才數，程式會自動找出跟您一樣的算法。</li>
    <li>到「③ 玻璃單價表」「④ 加工與其他費用」把價格改成您的價格（黃底的格子是還沒有價格的）。</li>
-   <li>改好後到「⑤ 計價規則」按「複製單價表」，到 LINE 跟我們的對話框長按「貼上」送出，就完成了。</li>
+   <li>改好後按畫面最下面綠色的「✅ 填好了，傳給集思」，到 LINE 跟我們的對話框長按「貼上」送出，就完成了。您填的價格我們這邊看不到，一定要貼到 LINE 傳過來。</li>
   </ol>
   <p class="muted">您填的資料只存在您自己的手機或電腦，不會上傳到任何地方。換手機或清除瀏覽器資料就會不見，所以改好記得傳給我們。</p>
   </div>
@@ -594,6 +597,21 @@ async function copyText(text, label, hint) {
     el('textarea', { id: 'manualCopy', readonly: true, value: text, style: 'min-height:160px', onfocus: e => e.target.select() }),
     el('div', { class: 'row gap', style: 'margin-top:10px' }, el('button', { class: 'primary', onclick: closeModal }, '好了'))));
   const mc = $('#manualCopy'); if (mc) { mc.focus(); mc.select(); }
+  return ok;
+}
+/* 工班版：底部綠色「填好了，傳給集思」按鈕 */
+async function vendorSend() {
+  const n = S.glassTypes.filter(t => num(t.price) > 0 || num(t.edge) > 0 || num(t.bevel) > 0).length
+    + S.procs.filter(p => num(p.price) > 0).length + S.extrasLib.filter(x => num(x.price) > 0).length;
+  if (!n && !(await askConfirm('您還沒有填任何價格（全部都是 0 元）。\n請先到「③ 玻璃單價表」「④ 加工與其他費用」填價格。\n\n確定還是要傳嗎？', '還是要傳'))) return;
+  const ok = await copyText(pricesText(), '單價表', '到 LINE 對話框長按「貼上」傳給集思就可以了');
+  if (!ok) return;
+  showModal(el('div', {},
+    el('h3', { text: '✅ 已經複製好了' }),
+    el('p', { text: `您填了 ${n} 項價格。` }),
+    el('p', { style: 'font-size:1.15rem;font-weight:700', text: '現在回到 LINE 跟集思的對話框，在輸入框「長按」，選「貼上」，再按送出就完成了。' }),
+    el('p', { class: 'muted', text: '貼上去會是一長串文字和數字，這是正常的，我們這邊會自動整理。之後價格有改，再按一次這個綠色按鈕、重新貼上傳給我們就好。' }),
+    el('div', { class: 'row gap', style: 'margin-top:10px' }, el('button', { class: 'primary', onclick: closeModal }, '知道了'))));
 }
 const cellSafe = v => { const s = String(v == null ? '' : v).replace(/[\t\r\n]/g, ' '); return /^[=+@]/.test(s) ? ' ' + s : s; };
 const toTSV = rows => rows.map(r => r.map(cellSafe).join('\t')).join('\r\n');
@@ -610,7 +628,7 @@ function topBanner() {
     el('div', { style: 'font-weight:700;font-size:1.08rem', text: '師傅您好，這是集思室內設計整理的玻璃計價方式，請幫我們看看：' }),
     el('div', { text: '① 在下面輸入幾片尺寸，看算出來的才數、光邊尺數、開孔費，跟您平常的算法一不一樣。不一樣的地方可以到「⑤ 計價規則」調整。' }),
     el('div', { text: '② 到「③ 玻璃單價表」「④ 加工與其他費用」把價格改成您的價格。' }),
-    el('div', { text: '③ 改好後到「⑤ 計價規則」按「複製單價表」，直接貼到 LINE 傳給我們就可以了。' }),
+    el('div', { style: 'font-weight:700', text: '③ 改好後按畫面最下面綠色的「✅ 填好了，傳給集思」，再回到 LINE 貼上傳給我們，才算完成（只填好不傳，我們這邊看不到）。' }),
     el('div', { class: 'muted', text: '您填的資料只存在您自己的手機或電腦，不會上傳到任何地方。' }));
   if (S.settings.pricesChecked) return el('div');
   return el('div', { class: 'banner bad no-print' }, '⛔ 目前的玻璃單價是「網路行情參考值」（多取高標），不是你玻璃行的價格。 ',
@@ -859,7 +877,8 @@ function refreshSummary() {
   const bad = A.warns.filter(w => w.lv === 'bad').length;
   const bar = $('#bar'); bar.textContent = '';
   if (VENDOR) {
-    bar.append(el('span', {}, `【${c.name}】`), el('span', {}, '合計（未稅） ', el('b', { text: money(A.cost) })),
+    bar.append(el('button', { class: 'sendBtn', id: 'btnVendorSend', onclick: vendorSend }, '✅ 填好了，傳給集思'),
+      el('span', {}, `【${c.name}】`), el('span', {}, '合計（未稅） ', el('b', { text: money(A.cost) })),
       el('span', {}, `計價 ${fmt(A.bill)} 才`),
       bad ? el('span', { style: 'color:#ffb4b4;font-weight:700', text: `⛔ ${bad} 個漏算／錯誤` }) : '');
     return A;
@@ -1186,7 +1205,7 @@ function importPricesText(text) {
   });
 }
 function priceShareCard() {
-  const copyBtn = el('button', { class: 'primary', id: 'btnCopyPrices', onclick: () => copyText(pricesText(), '單價表', VENDOR ? '到 LINE 對話框長按「貼上」傳給集思就可以了' : '') },
+  const copyBtn = el('button', { class: 'primary', id: 'btnCopyPrices', onclick: () => VENDOR ? vendorSend() : copyText(pricesText(), '單價表', '') },
     VENDOR ? '📋 複製單價表（貼到 LINE 傳給集思）' : '📋 複製目前的單價表');
   if (VENDOR) return el('div', { class: 'card' },
     el('p', { text: '單價和計價規則改好之後，按下面的按鈕，再到 LINE 跟我們的對話框長按「貼上」送出就可以了。' }),
